@@ -6,6 +6,7 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { extname } from "node:path";
 
 const POSTS = [
+  { slug: "un-ano-construyendo-agentes-que-trabajan-solos" },
   { slug: "Arquitecturas_de_IA_con_Agentes_Patrones_y_Documentacion_Ofi", strip: /\*{0,2}Nota del autor\*{0,2}[^\n]*\n+/i },
   { slug: "AutoGen_vs_LangChain_Guia_Comparativa_para_Desarrolladores" },
   { slug: "Frameworks_de_IA_para_TypeScript_Mas_Alla_de_Python" },
