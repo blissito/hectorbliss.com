@@ -42,6 +42,7 @@ const extraCss = `<style>
 .post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
 .list{max-width:760px;margin:0 auto;padding:56px 20px}
 .list article{border-top:1px solid var(--line);padding:26px 0;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
+.list article.no-thumb{grid-template-columns:1fr}
 .list .thumb{width:180px;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
 @media (max-width:640px){.list article{grid-template-columns:1fr}.list .thumb{width:100%}}
 .list h2{font-size:1.4rem;margin-bottom:6px}.list h2 a{text-decoration:none}.list h2 a:hover{color:var(--acc)}
@@ -128,8 +129,8 @@ for (const cfg of POSTS) {
 }
 await c.close();
 lista.sort((a, b) => b.createdAt - a.createdAt);
-const items = lista.map((x) => `<article>${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<div><h2><a href="/posts/${x.slug}/">${esc(x.title)}</a></h2><div class="meta">${fecha(x.createdAt)}</div><p>${esc(x.desc)}…</p></div></article>`).join("\n");
-writeFileSync("posts/index.html", page("Blog", "Notas sobre IA aplicada a negocios, agentes y herramientas que no te amarran.", `<main class="list"><span class="eyebrow">Blog</span><h1 style="font-size:2.4rem;margin-bottom:8px">Lo que he aprendido construyendo con IA</h1><p class="lead">Seis piezas que siguen valiendo. Lo demás está en <a href="https://blog.hectorbliss.com" style="color:var(--acc)">blog.hectorbliss.com</a>.</p>${items}</main>`, "https://hectorbliss.com/posts/"));
+const items = lista.map((x) => `<article class="${x.cover ? "" : "no-thumb"}">${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<div><h2><a href="/posts/${x.slug}/">${esc(x.title)}</a></h2><div class="meta">${fecha(x.createdAt)}</div><p>${esc(x.desc)}…</p></div></article>`).join("\n");
+writeFileSync("posts/index.html", page("Blog", "Notas sobre IA aplicada a negocios, agentes y herramientas que no te amarran.", `<main class="list"><span class="eyebrow">Blog</span><h1 style="font-size:2.4rem;margin-bottom:8px">Lo que he aprendido construyendo con IA</h1><p class="lead">Siete piezas que siguen valiendo. Lo demás está en <a href="https://blog.hectorbliss.com" style="color:var(--acc)">blog.hectorbliss.com</a>.</p>${items}</main>`, "https://hectorbliss.com/posts/"));
 // Home: "Lo último que he escrito" entre marcadores
 const ultimos = lista.slice(0, 3).map((x) => `    <div class="card">${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<time datetime="${new Date(x.createdAt).toISOString().slice(0,10)}">${fecha(x.createdAt)}</time><h3><a href="/posts/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(x.desc.slice(0, 120))}…</p></div>`).join("\n");
 const home = readFileSync("index.html", "utf8").replace(/<!-- ultimo:start -->[\s\S]*?<!-- ultimo:end -->/, `<!-- ultimo:start -->\n${ultimos}\n<!-- ultimo:end -->`);
