@@ -1,0 +1,24 @@
+{
+  "name": "recuperado",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blissito/hectorbliss.com.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blissito/hectorbliss.com/issues"
+  },
+  "homepage": "https://github.com/blissito/hectorbliss.com#readme",
+  "description": "",
+  "devDependencies": {
+    "marked": "^18.0.13",
+    "mongodb": "^6.21.0"
+  }
+}

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoGen vs LangChain: Guía Comparativa para Desarrolladores · Héctor Bliss</title>
+<meta name="description" content="El desarrollo con IA ha evolucionado rápidamente, y dos frameworks destacan en la construcción de aplicaciones inteligentes: AutoGen de Microsoft y LangCha">
+<link rel="canonical" href="https://hectorbliss.com/posts/AutoGen_vs_LangChain_Guia_Comparativa_para_Desarrolladores/">
+<meta property="og:title" content="AutoGen vs LangChain: Guía Comparativa para Desarrolladores"><meta property="og:description" content="El desarrollo con IA ha evolucionado rápidamente, y dos frameworks destacan en la construcción de aplicaciones inteligentes: AutoGen de Microsoft y LangCha"><meta property="og:type" content="article"><meta property="og:locale" content="es_MX">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ee;--bg2:#ffffff;--line:#e2ded4;--fg:#14191d;--muted:#5d6b71;--acc:#1f9e86;--acc2:#4c8a2c;--ink:#ffffff;--nav:rgba(246,244,238,.85);--shadow:rgba(31,158,134,.25)}
+:root[data-theme="dark"]{--bg:#0e1317;--bg2:#151c22;--line:#25313a;--fg:#f2f5f4;--muted:#9aa8ae;--acc:#85ddcb;--acc2:#8dcf6e;--ink:#0e1317;--nav:rgba(14,19,23,.85);--shadow:rgba(133,221,203,.25)}
+.theme-toggle{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:10px;width:40px;height:40px;cursor:pointer;display:grid;place-items:center;margin-right:12px}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .moon{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .moon{display:block}
+.navr{display:flex;align-items:center}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;background:var(--nav);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;text-decoration:none;font-size:1.1rem}
+.brand span{color:var(--acc)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.95rem}
+nav ul a{text-decoration:none;color:var(--muted)}
+nav ul a:hover{color:var(--fg)}
+.btn{display:inline-block;background:var(--acc);color:var(--ink);font-weight:600;text-decoration:none;padding:14px 26px;border-radius:12px;border:2px solid var(--acc);box-shadow:6px 6px 0 var(--shadow);transition:transform .15s}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn.ghost{background:transparent;color:var(--acc);box-shadow:none}
+.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:14px}
+.hero{padding:88px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.2rem)}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p a,.lead a{color:var(--acc);text-decoration:underline;text-underline-offset:3px}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:52ch;margin:22px 0 30px}
+.photo{position:relative;margin:0}
+.photo img{width:100%;max-width:420px;height:auto;display:block;border-radius:24px;border:3px solid var(--line);box-shadow:14px 14px 0 var(--acc);margin-left:auto}
+.photo figcaption{position:absolute;left:0;bottom:-18px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:.9rem}
+.photo figcaption b{display:block;color:var(--fg)}
+.photo figcaption span{color:var(--muted)}
+section{padding:80px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:12px}
+.lead{color:var(--muted);font-size:1.1rem;max-width:64ch;margin:0 0 40px}
+.problem{background:var(--bg2)}
+.problem p{max-width:68ch;color:var(--muted);font-size:1.1rem}
+.problem strong{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.card h3{font-size:1.2rem;margin-bottom:10px}
+.card p{color:var(--muted);margin:0;font-size:.98rem}
+.card .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--acc);color:var(--ink);font-weight:800;margin-bottom:16px;font-family:"Bricolage Grotesque",sans-serif}
+.steps{grid-template-columns:repeat(4,1fr)}
+.faq details{border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px;background:var(--bg2)}
+.faq summary{cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--acc);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin:12px 0 0}
+.cta{text-align:center;padding:96px 0}
+.cta h2{font-size:clamp(2rem,4.5vw,3.2rem)}
+.cta p{color:var(--muted);max-width:56ch;margin:16px auto 32px;font-size:1.1rem}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.photo img{margin:0 auto}.photo figcaption{left:50%;transform:translateX(-50%);white-space:nowrap}.grid,.steps{grid-template-columns:1fr}nav ul{display:none}.hero{padding:56px 0}}
+</style>
+<style>
+.post{max-width:760px;margin:0 auto;padding:56px 20px}
+.post h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:14px}
+.post .meta{color:var(--muted);margin-bottom:36px}
+.post h2{font-size:1.6rem;margin:44px 0 12px}
+.post h3{font-size:1.25rem;margin:32px 0 10px}
+.post p,.post li{font-size:1.06rem}
+.post a{color:var(--acc)}
+.post img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.post pre{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:.9rem}
+.post code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.post blockquote{border-left:4px solid var(--acc);margin:0;padding:4px 18px;color:var(--muted)}
+.post table{border-collapse:collapse;width:100%;font-size:.95rem}.post td,.post th{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
+.list{max-width:760px;margin:0 auto;padding:56px 20px}
+.list article{border-top:1px solid var(--line);padding:26px 0}
+.list h2{font-size:1.4rem;margin-bottom:6px}.list h2 a{text-decoration:none}.list h2 a:hover{color:var(--acc)}
+.list .meta{color:var(--muted);font-size:.9rem}.list p{color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/#">hector<span>bliss</span></a>
+  <ul><li><a href="/#servicios">Servicios</a></li><li><a href="/#proceso">Proceso</a></li><li><a href="/#faq">Preguntas</a></li><li><a href="https://www.hectorbliss.com/posts">Blog</a></li></ul>
+  <div class="navr"><button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="btn ghost" href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda una llamada</a></div>
+</div></nav>
+<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>AutoGen vs LangChain: Guía Comparativa para Desarrolladores</h1><div class="meta">23 de agosto de 2025 · Héctor Bliss</div><p>El desarrollo con IA ha evolucionado rápidamente, y dos frameworks destacan en la construcción de aplicaciones inteligentes: <strong>AutoGen</strong> de Microsoft y <strong>LangChain</strong>. Ambos resuelven problemas similares pero con enfoques fundamentalmente diferentes.</p>
+<h2>¿Qué es AutoGen?</h2>
+<p>AutoGen es un framework de Microsoft Research que permite crear <strong>sistemas multi-agente conversacionales</strong>. Su filosofía central es simple: los agentes de IA colaboran mediante conversaciones estructuradas para resolver problemas complejos.</p>
+<pre><code class="language-python"># Ejemplo básico de AutoGen
+assistant = AssistantAgent(&quot;assistant&quot;)
+user_proxy = UserProxyAgent(&quot;user&quot;)
+user_proxy.initiate_chat(assistant, message=&quot;Analiza estos datos...&quot;)
+</code></pre>
+<h3>Fortalezas de AutoGen:</h3>
+<ul>
+<li><strong>Colaboración natural</strong>: Los agentes se comunican como humanos en un equipo</li>
+<li><strong>Ejecución de código</strong>: Integración nativa para ejecutar y validar código</li>
+<li><strong>Patrones predefinidos</strong>: GroupChat, Sequential Chat, y otros patrones listos para usar</li>
+<li><strong>Debugging intuitivo</strong>: Las conversaciones son transparentes y fáciles de seguir</li>
+</ul>
+<h2>¿Qué es LangChain?</h2>
+<p>LangChain es un framework que facilita la construcción de <strong>pipelines y cadenas de procesamiento</strong> con LLMs. Se centra en conectar modelos de lenguaje con herramientas, bases de datos y APIs externas.</p>
+<pre><code class="language-python"># Ejemplo básico de LangChain
+chain = LLMChain(llm=ChatOpenAI(), prompt=prompt_template)
+result = chain.run(input=&quot;Procesa este texto...&quot;)
+</code></pre>
+<h3>Fortalezas de LangChain:</h3>
+<ul>
+<li><strong>Ecosistema amplio</strong>: Cientos de integraciones con herramientas y servicios</li>
+<li><strong>Abstracciones potentes</strong>: Chains, Agents, Memory, y Retrievers</li>
+<li><strong>RAG optimizado</strong>: Excelente para búsqueda y recuperación de información</li>
+<li><strong>Producción-ready</strong>: LangServe para APIs y LangSmith para observabilidad</li>
+</ul>
+<h2>Comparación Directa</h2>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>AutoGen</th>
+<th>LangChain</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Paradigma</strong></td>
+<td>Conversaciones multi-agente</td>
+<td>Cadenas y pipelines</td>
+</tr>
+<tr>
+<td><strong>Curva de aprendizaje</strong></td>
+<td>Suave, conceptos intuitivos</td>
+<td>Moderada, muchas abstracciones</td>
+</tr>
+<tr>
+<td><strong>Casos de uso ideales</strong></td>
+<td>Resolución colaborativa, code generation</td>
+<td>RAG, chatbots, procesamiento de datos</td>
+</tr>
+<tr>
+<td><strong>Flexibilidad</strong></td>
+<td>Alta en diseño de agentes</td>
+<td>Alta en integraciones</td>
+</tr>
+<tr>
+<td><strong>Debugging</strong></td>
+<td>Conversaciones legibles</td>
+<td>Requiere herramientas adicionales</td>
+</tr>
+<tr>
+<td><strong>Comunidad</strong></td>
+<td>Creciente, respaldada por Microsoft</td>
+<td>Muy activa, ecosistema maduro</td>
+</tr>
+</tbody></table>
+<h2>¿Cuándo usar cada uno?</h2>
+<h3>Usa AutoGen cuando:</h3>
+<ul>
+<li>Necesites múltiples agentes especializados trabajando juntos</li>
+<li>Tu problema se beneficie de la deliberación y revisión entre agentes</li>
+<li>Requieras ejecución y validación de código automática</li>
+<li>Prefieras un modelo mental conversacional</li>
+</ul>
+<h3>Usa LangChain cuando:</h3>
+<ul>
+<li>Construyas aplicaciones RAG (Retrieval-Augmented Generation)</li>
+<li>Necesites integraciones con múltiples servicios externos</li>
+<li>Requieras pipelines de procesamiento complejos</li>
+<li>Busques herramientas de producción maduras</li>
+</ul>
+<h2>Ejemplo Práctico: Sistema de Análisis de Datos</h2>
+<p><strong>Con AutoGen:</strong></p>
+<pre><code class="language-python">analyst = AssistantAgent(&quot;data_analyst&quot;, 
+    system_message=&quot;Analiza datos y genera insights&quot;)
+coder = AssistantAgent(&quot;coder&quot;, 
+    system_message=&quot;Escribe código Python para análisis&quot;)
+critic = AssistantAgent(&quot;critic&quot;, 
+    system_message=&quot;Revisa y mejora el análisis&quot;)
+
+groupchat = GroupChat(agents=[analyst, coder, critic])
+</code></pre>
+<p><strong>Con LangChain:</strong></p>
+<pre><code class="language-python">chain = (
+    {&quot;context&quot;: retriever, &quot;question&quot;: RunnablePassthrough()}
+    | prompt
+    | llm
+    | StrOutputParser()
+)
+result = chain.invoke(&quot;Analiza las ventas del Q4&quot;)
+</code></pre>
+<h2>Tendencias y Futuro</h2>
+<p>AutoGen está evolucionando hacia <strong>AutoGen Studio</strong>, una interfaz visual para diseñar flujos multi-agente. LangChain, por su parte, está expandiendo <strong>LangGraph</strong> para flujos más complejos y con estado.</p>
+<p>Ambos frameworks están convergiendo en algunas áreas: AutoGen añade más integraciones mientras LangChain mejora sus capacidades multi-agente. La elección no es excluyente; muchos proyectos exitosos combinan ambos.</p>
+<h2>Conclusión</h2>
+<p>No existe un &quot;ganador&quot; definitivo. <strong>AutoGen</strong> brilla en escenarios donde la colaboración entre agentes es clave, mientras que <strong>LangChain</strong> excele en la construcción de aplicaciones de producción con múltiples integraciones.</p>
+<p>Para principiantes, recomiendo empezar con AutoGen si tu enfoque es la resolución de problemas mediante agentes colaborativos, o con LangChain si necesitas construir aplicaciones que conecten LLMs con el mundo exterior.</p>
+<p>La clave está en entender tu problema: ¿necesitas un equipo de expertos virtuales discutiendo (AutoGen) o un pipeline robusto de procesamiento (LangChain)? La respuesta guiará tu elección.</p>
+</main>
+<footer><div class="wrap">
+  <span>© 2026 Héctor Bliss · con el equipo de <a href="https://fixter.org" target="_blank" rel="noopener" style="margin:0">fixter.org</a></span>
+  <span><a href="https://www.hectorbliss.com/posts">Blog</a><a href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda</a></span>
+</div></footer>
+<script>
+// Claro por default; el switch guarda la elección en localStorage
+document.getElementById("themeToggle").addEventListener("click",function(){var r=document.documentElement;var d=r.getAttribute("data-theme")==="dark"?"light":"dark";r.setAttribute("data-theme",d);try{localStorage.setItem("theme",d)}catch(e){}});
+</script>
+</body>
+</html>

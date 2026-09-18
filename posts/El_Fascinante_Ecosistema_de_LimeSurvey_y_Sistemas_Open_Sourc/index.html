@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Fascinante Ecosistema de LimeSurvey y Sistemas Open Source Auto-Instalables con API · Héctor Bliss</title>
+<meta name="description" content="Si tu negocio depende de encuestas, analytics o automatizaciones, la pregunta no es qué herramienta está de moda sino cuál no te amarra: que puedas instala">
+<link rel="canonical" href="https://hectorbliss.com/posts/El_Fascinante_Ecosistema_de_LimeSurvey_y_Sistemas_Open_Sourc/">
+<meta property="og:title" content="El Fascinante Ecosistema de LimeSurvey y Sistemas Open Source Auto-Instalables con API"><meta property="og:description" content="Si tu negocio depende de encuestas, analytics o automatizaciones, la pregunta no es qué herramienta está de moda sino cuál no te amarra: que puedas instala"><meta property="og:type" content="article"><meta property="og:locale" content="es_MX">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ee;--bg2:#ffffff;--line:#e2ded4;--fg:#14191d;--muted:#5d6b71;--acc:#1f9e86;--acc2:#4c8a2c;--ink:#ffffff;--nav:rgba(246,244,238,.85);--shadow:rgba(31,158,134,.25)}
+:root[data-theme="dark"]{--bg:#0e1317;--bg2:#151c22;--line:#25313a;--fg:#f2f5f4;--muted:#9aa8ae;--acc:#85ddcb;--acc2:#8dcf6e;--ink:#0e1317;--nav:rgba(14,19,23,.85);--shadow:rgba(133,221,203,.25)}
+.theme-toggle{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:10px;width:40px;height:40px;cursor:pointer;display:grid;place-items:center;margin-right:12px}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .moon{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .moon{display:block}
+.navr{display:flex;align-items:center}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;background:var(--nav);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;text-decoration:none;font-size:1.1rem}
+.brand span{color:var(--acc)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.95rem}
+nav ul a{text-decoration:none;color:var(--muted)}
+nav ul a:hover{color:var(--fg)}
+.btn{display:inline-block;background:var(--acc);color:var(--ink);font-weight:600;text-decoration:none;padding:14px 26px;border-radius:12px;border:2px solid var(--acc);box-shadow:6px 6px 0 var(--shadow);transition:transform .15s}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn.ghost{background:transparent;color:var(--acc);box-shadow:none}
+.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:14px}
+.hero{padding:88px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.2rem)}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p a,.lead a{color:var(--acc);text-decoration:underline;text-underline-offset:3px}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:52ch;margin:22px 0 30px}
+.photo{position:relative;margin:0}
+.photo img{width:100%;max-width:420px;height:auto;display:block;border-radius:24px;border:3px solid var(--line);box-shadow:14px 14px 0 var(--acc);margin-left:auto}
+.photo figcaption{position:absolute;left:0;bottom:-18px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:.9rem}
+.photo figcaption b{display:block;color:var(--fg)}
+.photo figcaption span{color:var(--muted)}
+section{padding:80px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:12px}
+.lead{color:var(--muted);font-size:1.1rem;max-width:64ch;margin:0 0 40px}
+.problem{background:var(--bg2)}
+.problem p{max-width:68ch;color:var(--muted);font-size:1.1rem}
+.problem strong{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.card h3{font-size:1.2rem;margin-bottom:10px}
+.card p{color:var(--muted);margin:0;font-size:.98rem}
+.card .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--acc);color:var(--ink);font-weight:800;margin-bottom:16px;font-family:"Bricolage Grotesque",sans-serif}
+.steps{grid-template-columns:repeat(4,1fr)}
+.faq details{border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px;background:var(--bg2)}
+.faq summary{cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--acc);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin:12px 0 0}
+.cta{text-align:center;padding:96px 0}
+.cta h2{font-size:clamp(2rem,4.5vw,3.2rem)}
+.cta p{color:var(--muted);max-width:56ch;margin:16px auto 32px;font-size:1.1rem}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.photo img{margin:0 auto}.photo figcaption{left:50%;transform:translateX(-50%);white-space:nowrap}.grid,.steps{grid-template-columns:1fr}nav ul{display:none}.hero{padding:56px 0}}
+</style>
+<style>
+.post{max-width:760px;margin:0 auto;padding:56px 20px}
+.post h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:14px}
+.post .meta{color:var(--muted);margin-bottom:36px}
+.post h2{font-size:1.6rem;margin:44px 0 12px}
+.post h3{font-size:1.25rem;margin:32px 0 10px}
+.post p,.post li{font-size:1.06rem}
+.post a{color:var(--acc)}
+.post img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.post pre{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:.9rem}
+.post code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.post blockquote{border-left:4px solid var(--acc);margin:0;padding:4px 18px;color:var(--muted)}
+.post table{border-collapse:collapse;width:100%;font-size:.95rem}.post td,.post th{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
+.list{max-width:760px;margin:0 auto;padding:56px 20px}
+.list article{border-top:1px solid var(--line);padding:26px 0}
+.list h2{font-size:1.4rem;margin-bottom:6px}.list h2 a{text-decoration:none}.list h2 a:hover{color:var(--acc)}
+.list .meta{color:var(--muted);font-size:.9rem}.list p{color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/#">hector<span>bliss</span></a>
+  <ul><li><a href="/#servicios">Servicios</a></li><li><a href="/#proceso">Proceso</a></li><li><a href="/#faq">Preguntas</a></li><li><a href="https://www.hectorbliss.com/posts">Blog</a></li></ul>
+  <div class="navr"><button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="btn ghost" href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda una llamada</a></div>
+</div></nav>
+<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>El Fascinante Ecosistema de LimeSurvey y Sistemas Open Source Auto-Instalables con API</h1><div class="meta">3 de septiembre de 2025 · Héctor Bliss</div><p>Si tu negocio depende de encuestas, analytics o automatizaciones, la pregunta no es qué herramienta está de moda sino cuál no te amarra: que puedas instalarla tú, sacar tus datos por API y cambiarla sin volver a empezar. Este recorrido es por las que cumplen eso.</p>
+<p><em>Descubre las mejores alternativas open source para encuestas, analytics y automatización en 2025</em></p>
+<h2>🔍 Introducción</h2>
+<p>¿Alguna vez te has preguntado qué hay más allá de LimeSurvey? El mundo del software open source auto-instalable es vasto y emocionante, lleno de herramientas poderosas que pueden transformar tu workflow. En este post, exploraremos el ecosistema completo de sistemas similares a LimeSurvey y descubriremos algunas gemas ocultas.</p>
+<h2>🔥 LimeSurvey: Los Pioneros</h2>
+<h3>La Historia Detrás del Gigante</h3>
+<p>LimeSurvey nació en 2003 como &quot;PHPSurveyor&quot;, creado por <strong>Jason Cleeland</strong>, un desarrollador australiano visionario. Desde entonces, ha evolucionado bajo el liderazgo de <strong>Carsten Schmitz</strong> y la empresa <strong>LimeSurvey GmbH</strong> (Hamburgo, Alemania).</p>
+<p><strong>Datos impresionantes:</strong></p>
+<ul>
+<li>🌍 <strong>20+ años</strong> de desarrollo continuo</li>
+<li>🏢 Usado en <strong>80+ países</strong></li>
+<li>👥 Comunidad activa de miles de desarrolladores</li>
+<li>🆓 Completamente gratuito y open source</li>
+</ul>
+<h3>¿Por Qué Sigue Siendo Relevante?</h3>
+<p>LimeSurvey es el &quot;abuelo respetado&quot; de las plataformas de encuestas. Su fortaleza radica en:</p>
+<ul>
+<li><strong>Funcionalidad completa</strong>: Lógica condicional avanzada, 28+ tipos de preguntas</li>
+<li><strong>Escalabilidad</strong>: Sin límites de encuestas, preguntas o respuestas</li>
+<li><strong>Flexibilidad</strong>: PHP + MySQL/PostgreSQL/SQLite</li>
+<li><strong>Compliance</strong>: GDPR ready desde el día uno</li>
+</ul>
+<h2>🚀 Las Nuevas Estrellas del Ecosistema</h2>
+<h3>1. <strong>Formbricks</strong> ⭐ 8,900 stars</h3>
+<p><em>&quot;El Qualtrics Open Source que todos esperábamos&quot;</em></p>
+<pre><code class="language-typescript">// Stack moderno
+- Next.js + React + TypeScript
+- Tailwind CSS + Prisma
+- Docker ready
+- API REST completa
+</code></pre>
+<p><strong>¿Qué lo hace especial?</strong></p>
+<ul>
+<li>🎨 <strong>UI moderna</strong>: Interfaz del siglo XXI vs. la antigua de LimeSurvey</li>
+<li>🔒 <strong>Privacy-first</strong>: GDPR compliant por defecto</li>
+<li>🚀 <strong>Deploy fácil</strong>: Un comando Docker y listo</li>
+<li>🔗 <strong>Integrations</strong>: Slack, Notion, Zapier nativo</li>
+</ul>
+<h3>2. <strong>SurveyJS</strong> ⭐ 4,300 stars</h3>
+<p><em>&quot;Para desarrolladores que necesitan control total&quot;</em></p>
+<pre><code class="language-javascript">// Máxima flexibilidad
+const survey = new Survey.Model({
+  questions: [
+    { type: &quot;text&quot;, name: &quot;name&quot;, title: &quot;Your name:&quot; },
+    { type: &quot;rating&quot;, name: &quot;satisfaction&quot;, title: &quot;Rate us:&quot; }
+  ]
+});
+</code></pre>
+<p><strong>Perfecto para:</strong></p>
+<ul>
+<li>Integrar encuestas en apps existentes</li>
+<li>Control total sobre diseño y lógica</li>
+<li>Soporte nativo React, Angular, Vue</li>
+</ul>
+<h3>3. <strong>Typebot.io</strong> ⭐ 8,800 stars</h3>
+<p><em>&quot;El futuro conversacional de las encuestas&quot;</em></p>
+<p><strong>La revolución:</strong> En lugar de formularios estáticos, creates <strong>conversaciones fluidas</strong> que se sienten naturales.</p>
+<h2>🤖 Sistemas Curiosos que te Sorprenderán</h2>
+<h3><strong>Khoj</strong> ⭐ 30,000 stars - &quot;Tu Segundo Cerebro AI&quot;</h3>
+<p>Imagina tener un asistente que conoce todos tus documentos:</p>
+<pre><code class="language-bash"># Instala tu cerebro AI personal
+docker run -p 42110:42110 ghcr.io/khoj-ai/khoj:latest
+</code></pre>
+<p><strong>Casos de uso locos:</strong></p>
+<ul>
+<li>&quot;¿Qué opinaba sobre X en mi email de hace 6 meses?&quot;</li>
+<li>Busca en PDFs, notas, código fuente simultáneamente</li>
+<li>Chat con tus propios datos</li>
+</ul>
+<h3><strong>PostHog</strong> ⭐ 22,000 stars - &quot;Google Analytics con Superpoderes&quot;</h3>
+<p>No solo analytics, sino <strong>product intelligence</strong> completo:</p>
+<ul>
+<li>📹 <strong>Session recordings</strong>: Ve exactamente qué hacen tus usuarios</li>
+<li>🧪 <strong>A/B testing</strong>: Experimentos integrados</li>
+<li>🚩 <strong>Feature flags</strong>: Activa/desactiva funciones en tiempo real</li>
+</ul>
+<h3><strong>n8n</strong> ⭐ 47,000 stars - &quot;Zapier que Controlas Tú&quot;</h3>
+<p><strong>400+ integraciones</strong> en un visual builder espectacular:</p>
+<pre><code class="language-yaml"># Workflow example
+Trigger: New survey response (LimeSurvey)
+↓
+Action: Analyze sentiment (OpenAI)
+↓  
+Action: Send to Slack if negative
+↓
+Action: Update CRM (Salesforce)
+</code></pre>
+<h2>🏗️ CMS y Gestores de Contenido Innovadores</h2>
+<h3><strong>Strapi</strong> ⭐ 63,000 stars - &quot;Headless CMS Rey&quot;</h3>
+<pre><code class="language-javascript">// API automática generada
+GET /api/posts          // Lista posts
+POST /api/posts         // Crear post
+PUT /api/posts/:id      // Actualizar
+</code></pre>
+<p><strong>Magia:</strong> Creas tu esquema de datos, Strapi genera automáticamente:</p>
+<ul>
+<li>Admin panel completo</li>
+<li>API REST + GraphQL</li>
+<li>Sistema de permisos</li>
+<li>Webhooks</li>
+</ul>
+<h3><strong>NocoDB</strong> ⭐ 48,000 stars - &quot;Airtable Open Source&quot;</h3>
+<p><strong>El truco:</strong> Conectas tu base de datos existente, obtienes interface spreadsheet mágica.</p>
+<pre><code class="language-sql">-- Tu MySQL aburrida
+SELECT * FROM users WHERE age &gt; 25;
+</code></pre>
+<p>↓ Se convierte en ↓</p>
+<pre><code>🎨 Interface visual con filtros, sorts, colaboración en tiempo real
+</code></pre>
+<h2>🔍 Tendencias Fascinantes del Ecosistema 2025</h2>
+<h3>1. <strong>AI-First Everything</strong></h3>
+<p>Casi toda herramienta nueva integra LLMs:</p>
+<ul>
+<li><strong>Flowise</strong> ⭐ 30k: Visual LLM chain builder</li>
+<li><strong>Dify</strong> ⭐ 50k: Plataforma para crear apps AI</li>
+<li><strong>OpenLLM-Monitor</strong>: Dashboard para costos y performance de APIs AI</li>
+</ul>
+<h3>2. <strong>Privacy-First Renaissance</strong></h3>
+<p>Post-GDPR, todo el mundo quiere control de sus datos:</p>
+<ul>
+<li><strong>Plausible Analytics</strong>: &lt;1KB JavaScript, zero cookies</li>
+<li><strong>Immich</strong>: Google Photos self-hosted con reconocimiento facial</li>
+<li><strong>Bitwarden</strong>: Password manager que controlas tú</li>
+</ul>
+<h3>3. <strong>Visual Programming Explosion</strong></h3>
+<p>Interfaces drag-and-drop dominan:</p>
+<ul>
+<li><strong>ToolJet</strong>: Internal tools sin código</li>
+<li><strong>Windmill</strong>: Scripts as workflows</li>
+<li><strong>Activepieces</strong>: Open source Zapier</li>
+</ul>
+<h2>🎯 Recomendaciones por Caso de Uso</h2>
+<h3>📊 <strong>Para Sistemas de Encuestas como Panel</strong></h3>
+<h4><strong>Scenario 1: Startup/SMB</strong></h4>
+<pre><code>✅ Formbricks
+- Setup: 30 minutos
+- Mantenimiento: Mínimo
+- Costo: $0
+</code></pre>
+<h4><strong>Scenario 2: Enterprise/Universidad</strong></h4>
+<pre><code>✅ LimeSurvey
+- Funcionalidad: Máxima
+- Customización: Total
+- Complejidad: Alta (vale la pena)
+</code></pre>
+<h4><strong>Scenario 3: Developers</strong></h4>
+<pre><code>✅ SurveyJS
+- Control: 100%
+- Flexibilidad: Infinita
+- Learning curve: Media-alta
+</code></pre>
+<h3>📈 <strong>Para Analytics</strong></h3>
+<h4><strong>Simplicidad</strong> → <strong>Plausible</strong></h4>
+<h4><strong>Funcionalidad completa</strong> → <strong>PostHog</strong></h4>
+<h4><strong>Ultra-ligero</strong> → <strong>Umami</strong></h4>
+<h3>🤖 <strong>Para Automatización</strong></h3>
+<h4><strong>Visual workflows</strong> → <strong>n8n</strong></h4>
+<h4><strong>Code-based</strong> → <strong>Windmill</strong></h4>
+<h4><strong>Business users</strong> → <strong>Activepieces</strong></h4>
+<h2>💡 Insights del Ecosistema</h2>
+<h3><strong>Stack Tecnológico Dominante 2025:</strong></h3>
+<pre><code class="language-yaml">Frontend: React/Next.js (80% de proyectos)
+Backend: Node.js + FastAPI + Laravel
+Base de datos: PostgreSQL (el nuevo estándar)
+Deploy: Docker + Kubernetes
+AI: OpenAI API + local LLMs (Ollama)
+</code></pre>
+<h3><strong>Comunidades Más Activas:</strong></h3>
+<ul>
+<li>🏠 <strong>r/selfhosted</strong>: 1M+ miembros compartiendo setups</li>
+<li>⭐ <strong>Awesome Self-Hosted</strong>: 200k+ stars, lista curada</li>
+<li>🔧 <strong>Homelab community</strong>: Hardware enthusiasts</li>
+</ul>
+<h2>🚀 El Futuro es Auto-Instalable</h2>
+<h3>¿Por qué importa esto en 2025?</h3>
+<ol>
+<li><strong>Data Ownership</strong>: Tus datos, tu servidor, tus reglas</li>
+<li><strong>Costo</strong>: La mayoría son gratuitos vs. $100s/mes SaaS</li>
+<li><strong>Customización</strong>: Modificar código vs. rogar por features</li>
+<li><strong>Privacy</strong>: GDPR compliance real vs. promesas marketing</li>
+<li><strong>Independence</strong>: No vendor lock-in, migra cuando quieras</li>
+</ol>
+<h3><strong>Próximas Tendencias a Observar:</strong></h3>
+<ul>
+<li>🧠 <strong>AI Integration</strong>: Todo tendrá chat GPT integrado</li>
+<li>🌐 <strong>Edge Computing</strong>: Deploy en la edge de Cloudflare</li>
+<li>🔐 <strong>Zero-Knowledge</strong>: Encriptación end-to-end por defecto</li>
+<li>📱 <strong>Mobile-First</strong>: PWAs que se sienten nativas</li>
+</ul>
+<h2>🎬 Conclusión</h2>
+<p>El ecosistema de software open source auto-instalable está más vibrante que nunca. Desde los pioneros como LimeSurvey hasta las nuevas estrellas como Formbricks y Typebot, tenemos opciones increíbles para cada necesidad.</p>
+<p><strong>La pregunta no es si deberías considerar alternativas open source, sino cuál elegir para tu próximo proyecto.</strong></p>
+<p>¿Ya tienes experiencia con alguna de estas herramientas? ¿Hay algún sistema que te llamó la atención? ¡Comparte tu experiencia!</p>
+<h2>🤝 ¿Necesitas Ayuda con Tu Implementación?</h2>
+<p>Después de leer sobre todas estas opciones, puede que te sientas abrumado pensando <strong>&quot;esto se ve increíble, pero ¿cómo lo implemento?&quot;</strong></p>
+<p><strong>¡No te preocupes!</strong> Si necesitas montar tu propio LimeSurvey, Formbricks, o cualquiera de estas herramientas open source pero no tienes tiempo o experiencia técnica para hacerlo, <strong>nosotros lo hacemos por ti</strong>.</p>
+<h3>🚀 <strong>Lo que ofrecemos:</strong></h3>
+<ul>
+<li>✅ <strong>Setup completo</strong> en tu propio servidor o cloud</li>
+<li>✅ <strong>Configuración optimizada</strong> para producción  </li>
+<li>✅ <strong>SSL, backups y monitoreo</strong> incluidos</li>
+<li>✅ <strong>Migración de datos</strong> desde tu plataforma actual</li>
+<li>✅ <strong>Capacitación</strong> para que sepas usar todo al 100%</li>
+<li>✅ <strong>Soporte ongoing</strong> cuando lo necesites</li>
+</ul>
+<p><strong>¿Por qué hacer esto solo cuando puedes tener expertos que ya lo han hecho cientos de veces?</strong></p>
+<p>👉 <strong><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=fixtergeek@gmail.com&amp;su=Consulta%20sobre%20implementaci%C3%B3n%20de%20herramientas%20open%20source&amp;body=Hola!%0A%0ALe%C3%AD%20tu%20post%20sobre%20LimeSurvey%20y%20el%20ecosistema%20de%20herramientas%20open%20source.%20Me%20interesa%20implementar:%0A%0A-%20%5BEscribe%20aqu%C3%AD%20qu%C3%A9%20herramienta%20te%20interesa%5D%0A%0ACont%C3%A9xtame%20m%C3%A1s%20sobre:%0A-%20Mi%20proyecto/empresa:%20%5BDescribe%20brevemente%5D%0A-%20Usuarios%20estimados:%20%5BCu%C3%A1ntos%20usuarios%20tendr%C3%ADas%5D%0A-%20Timeline:%20%5BCu%C3%A1ndo%20lo%20necesitas%5D%0A%0A%C2%A1Gracias!">Escríbeme</a></strong> y conversemos sobre tu proyecto**</p>
+<hr>
+<p><em>¿Te gustó este post? Suscríbete a mi lista para más contenido sobre desarrollo y herramientas open source.</em></p>
+<p><strong>Tags:</strong> #OpenSource #LimeSurvey #SelfHosted #API #Survey #Analytics #Automation #Privacy #GDPR #Docker</p>
+</main>
+<footer><div class="wrap">
+  <span>© 2026 Héctor Bliss · con el equipo de <a href="https://fixter.org" target="_blank" rel="noopener" style="margin:0">fixter.org</a></span>
+  <span><a href="https://www.hectorbliss.com/posts">Blog</a><a href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda</a></span>
+</div></footer>
+<script>
+// Claro por default; el switch guarda la elección en localStorage
+document.getElementById("themeToggle").addEventListener("click",function(){var r=document.documentElement;var d=r.getAttribute("data-theme")==="dark"?"light":"dark";r.setAttribute("data-theme",d);try{localStorage.setItem("theme",d)}catch(e){}});
+</script>
+</body>
+</html>
