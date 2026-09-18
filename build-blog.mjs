@@ -43,16 +43,20 @@ const extraCss = `<style>
 .list .meta{color:var(--muted);font-size:.9rem}.list p{color:var(--muted);margin:8px 0 0}
 </style>`;
 
-const page = (title, desc, body, canonical) => `<!doctype html>
-<html lang="es">
+const page = (title, desc, body, canonical, extraHead = "") => `<!doctype html>
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
 ${themeBoot}
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} · Héctor Bliss</title>
+<title>${esc(title)} · Héctor (blissmo) Campos</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
-<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:type" content="article"><meta property="og:locale" content="es_MX">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article"><meta property="og:site_name" content="hectorbliss.com"><meta property="og:locale" content="es_MX"><meta property="og:url" content="${canonical}">
+<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="https://hectorbliss.com/img/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="https://hectorbliss.com/img/og.png">
+${extraHead}
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -106,9 +110,10 @@ for (const cfg of POSTS) {
     if (id) html = `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${id}" title="Video" allowfullscreen loading="lazy"></iframe>` + html;
   }
   const desc = md.replace(/[#*>`\[\]()!_-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 155);
-  const body = `<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · Héctor Bliss</div>${html}</main>`;
+  const body = `<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · Héctor (blissmo) Campos</div>${html}</main>`;
   mkdirSync(`posts/${cfg.slug}`, { recursive: true });
-  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`));
+  const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: desc, datePublished: new Date(p.createdAt).toISOString(), dateModified: new Date(p.updatedAt || p.createdAt).toISOString(), inLanguage: "es-MX", image: "https://hectorbliss.com/img/og.png", mainEntityOfPage: `https://hectorbliss.com/posts/${cfg.slug}/`, author: { "@type": "Person", "@id": "https://hectorbliss.com/#person", name: "Héctor (blissmo) Campos", url: "https://hectorbliss.com/" } };
+  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script type="application/ld+json">${JSON.stringify(ld)}</script>`));
   lista.push({ slug: cfg.slug, title: p.title, createdAt: p.createdAt, desc, imgs: n });
   console.log("ok", cfg.slug, `${n} img`);
 }
@@ -116,4 +121,8 @@ await c.close();
 lista.sort((a, b) => b.createdAt - a.createdAt);
 const items = lista.map((x) => `<article><h2><a href="/posts/${x.slug}/">${esc(x.title)}</a></h2><div class="meta">${fecha(x.createdAt)}</div><p>${esc(x.desc)}…</p></article>`).join("\n");
 writeFileSync("posts/index.html", page("Blog", "Notas sobre IA aplicada a negocios, agentes y herramientas que no te amarran.", `<main class="list"><span class="eyebrow">Blog</span><h1 style="font-size:2.4rem;margin-bottom:8px">Lo que he aprendido construyendo con IA</h1><p class="lead">Seis piezas que siguen valiendo. Lo demás está en <a href="https://blog.hectorbliss.com" style="color:var(--acc)">blog.hectorbliss.com</a>.</p>${items}</main>`, "https://hectorbliss.com/posts/"));
-console.log("index con", lista.length, "posts");
+// Home: "Lo último que he escrito" entre marcadores
+const ultimos = lista.slice(0, 3).map((x) => `    <div class="card"><time datetime="${new Date(x.createdAt).toISOString().slice(0,10)}">${fecha(x.createdAt)}</time><h3><a href="/posts/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(x.desc.slice(0, 120))}…</p></div>`).join("\n");
+const home = readFileSync("index.html", "utf8").replace(/<!-- ultimo:start -->[\s\S]*?<!-- ultimo:end -->/, `<!-- ultimo:start -->\n${ultimos}\n<!-- ultimo:end -->`);
+writeFileSync("index.html", home);
+console.log("index con", lista.length, "posts; home con", Math.min(3, lista.length), "últimos");

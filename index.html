@@ -1,18 +1,28 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
 <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Héctor Bliss · Implementación de IA para PyMEs</title>
-<meta name="description" content="Te ayudo a implementar inteligencia artificial en tu negocio. Sin jerga técnica, sin promesas imposibles: asistentes, automatización y consultoría de IA con resultados medibles.">
+<title>Héctor (blissmo) Campos · Integración de IA para empresas</title>
+<meta name="description" content="Construyo Ghosty, Easybits, Mailmask y Formmy. Integro IA en la operación de tu empresa: asistentes con tus datos, automatización de procesos y agentes en WhatsApp y CRM. Ciudad de México.">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://hectorbliss.com/">
-<meta property="og:title" content="Héctor Bliss · Implementación de IA para PyMEs">
-<meta property="og:description" content="Haz que la inteligencia artificial trabaje para tu negocio. Sin jerga técnica, solo resultados reales.">
-<meta property="og:image" content="https://hectorbliss.com/img/hector.jpg">
 <link rel="icon" href="/favicon.png">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="hectorbliss.com">
 <meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://hectorbliss.com/">
+<meta property="og:title" content="Héctor (blissmo) Campos · Integración de IA para empresas">
+<meta property="og:description" content="Construyo Ghosty, Easybits, Mailmask y Formmy. Integro IA en la operación de tu empresa: asistentes con tus datos, automatización de procesos y agentes en WhatsApp y CRM. Ciudad de México.">
+<meta property="og:image" content="https://hectorbliss.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Construyo Ghosty, Easybits, Mailmask y Formmy. Integro IA en la operación de tu empresa.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Héctor (blissmo) Campos · Integración de IA para empresas">
+<meta name="twitter:description" content="Construyo Ghosty, Easybits, Mailmask y Formmy. Integro IA en la operación de tu empresa: asistentes con tus datos, automatización de procesos y agentes en WhatsApp y CRM. Ciudad de México.">
+<meta name="twitter:image" content="https://hectorbliss.com/img/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -24,9 +34,11 @@
 :root[data-theme="dark"] .theme-toggle .sun{display:none}
 :root[data-theme="dark"] .theme-toggle .moon{display:block}
 .navr{display:flex;align-items:center}
+.posts .card time{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}.posts .card h3 a{text-decoration:none;color:inherit}.posts .card h3 a:hover{color:var(--acc)}#escritos .lead a{color:var(--acc)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0}
 a{color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
@@ -75,15 +87,16 @@ section h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:12px}
 footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer a{color:var(--muted);text-decoration:none;margin-left:18px}
-@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.photo img{margin:0 auto}.photo figcaption{left:50%;transform:translateX(-50%);white-space:nowrap}.grid,.steps{grid-template-columns:1fr}nav ul{display:none}.hero{padding:56px 0}}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.photo img{margin:0 auto}.photo figcaption{left:50%;transform:translateX(-50%);max-width:calc(100% - 24px);width:max-content}.grid,.steps{grid-template-columns:1fr}nav ul{display:none}.hero{padding:56px 0}}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://hectorbliss.com/#person","name":"Héctor (blissmo) Campos","givenName":"Héctor","familyName":"Campos","alternateName":"blissmo","jobTitle":"Consultor de integración de IA","url":"https://hectorbliss.com/","image":"https://hectorbliss.com/img/hector.jpg","email":"contacto@fixter.org","telephone":"+52 771 241 2825","address":{"@type":"PostalAddress","addressLocality":"Ciudad de México","addressCountry":"MX"},"worksFor":{"@id":"https://hectorbliss.com/#service"},"knowsAbout":["Integración de IA","Agentes de IA","Automatización de procesos","RAG","WhatsApp Business API","TypeScript","Rust","Firecracker microVMs"],"sameAs":["https://www.linkedin.com/in/hectorbliss/","https://github.com/blissito","https://ghosty.studio","https://easybits.cloud","https://mailmask.studio","https://formmy.app","https://fixter.org"]},{"@type":"ProfessionalService","@id":"https://hectorbliss.com/#service","name":"Héctor Campos · Integración de IA","url":"https://hectorbliss.com/","image":"https://hectorbliss.com/img/og.png","description":"Construyo Ghosty, Easybits, Mailmask y Formmy. Integro IA en la operación de tu empresa: asistentes con tus datos, automatización de procesos y agentes en WhatsApp y CRM. Ciudad de México.","telephone":"+52 771 241 2825","email":"contacto@fixter.org","priceRange":"Por proyecto","areaServed":[{"@type":"Country","name":"México"},{"@type":"Place","name":"Latinoamérica"}],"address":{"@type":"PostalAddress","addressLocality":"Ciudad de México","addressCountry":"MX"},"founder":{"@id":"https://hectorbliss.com/#person"},"sameAs":["https://www.linkedin.com/in/hectorbliss/","https://github.com/blissito","https://ghosty.studio","https://easybits.cloud","https://mailmask.studio","https://formmy.app","https://fixter.org"],"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Asistentes con la documentación y datos de la empresa"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Automatización de procesos"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Agentes conectados a WhatsApp, Slack y CRM"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Integración con sistemas existentes"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Consultoría de IA"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Soporte y capacitación del equipo"}}]},{"@type":"WebSite","@id":"https://hectorbliss.com/#website","url":"https://hectorbliss.com/","name":"hectorbliss.com","inLanguage":"es-MX","publisher":{"@id":"https://hectorbliss.com/#person"}},{"@type":"FAQPage","@id":"https://hectorbliss.com/#faq","mainEntity":[{"@type":"Question","name":"¿Qué es la implementación de IA y cómo beneficia a mi PyME?","acceptedAnswer":{"@type":"Answer","text":"Consiste en integrar inteligencia artificial en tu negocio para automatizar procesos, mejorar la toma de decisiones y aumentar la eficiencia: menos costos operativos, atención al cliente 24/7 con asistentes inteligentes, tareas repetitivas automatizadas y análisis de datos para decidir mejor. No necesitas ser una empresa tecnológica para aprovecharla."}},{"@type":"Question","name":"¿Cuánto tiempo toma implementar una solución?","acceptedAnswer":{"@type":"Answer","text":"Asistente inteligente básico: 2 a 4 semanas. Automatización de procesos: 3 a 6 semanas. Integración con sistemas existentes: 4 a 8 semanas. Proyectos personalizados complejos: 2 a 3 meses. Trabajo con metodología ágil, entregando valor desde las primeras semanas."}},{"@type":"Question","name":"¿Necesito conocimientos técnicos?","acceptedAnswer":{"@type":"Answer","text":"No, absolutamente no. Mi trabajo es traducir la complejidad técnica en soluciones simples. Tú te enfocas en tu negocio y en explicarme qué problemas necesitas resolver; yo me encargo de desarrollo, integración, pruebas y capacitación de tu equipo. Hablamos en español, no en código."}},{"@type":"Question","name":"¿Cuánto cuesta?","acceptedAnswer":{"@type":"Answer","text":"Trabajo por proyecto cerrado, no por hora: antes de empezar sabes el precio total, qué incluye y cuándo se entrega. Se arranca con un anticipo pequeño y el resto se paga en mensualidades mientras el sistema ya trabaja para ti, con soporte incluido en cada mes. Si a mitad del camino quieres más, se cotiza aparte; nunca hay cargos que no hayas aprobado. La primera llamada es gratis y sales de ella con números, no con promesas."}},{"@type":"Question","name":"¿Ofreces soporte después de la implementación?","acceptedAnswer":{"@type":"Answer","text":"Sí. Monitoreo constante, actualizaciones con las últimas mejoras de IA, ajustes basados en el uso real, soporte técnico y capacitación continua para tu equipo. Ofrezco planes de soporte mensuales adaptados a tus necesidades."}},{"@type":"Question","name":"¿Se puede integrar con los sistemas que ya uso?","acceptedAnswer":{"@type":"Answer","text":"Sí, es una de mis especialidades: CRMs (Salesforce, HubSpot, Zoho), ERPs, bases de datos, hojas de cálculo, APIs personalizadas, herramientas de email, plataformas de e-commerce y más. No necesitas reemplazar tus herramientas; la IA se integra y las potencia."}},{"@type":"Question","name":"¿Qué pasa con la seguridad de mis datos?","acceptedAnswer":{"@type":"Answer","text":"Es prioritaria: datos cifrados en tránsito y en reposo, control de acceso, cumplimiento de mejores prácticas de protección de datos, hosting en infraestructura confiable y revisiones regulares de seguridad. Trabajo con proveedores de IA que cumplen estándares internacionales."}}]}]}</script>
 </head>
 <body>
 <nav><div class="wrap">
   <a class="brand" href="#">hector<span>bliss</span></a>
-  <ul><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#faq">Preguntas</a></li><li><a href="/posts/">Blog</a></li></ul>
+  <ul><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#faq">Preguntas</a></li><li><a href="#escritos">Escritos</a></li><li><a href="/posts/">Blog</a></li></ul>
   <div class="navr"><button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-  <a class="btn ghost" href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda una llamada</a></div>
+  <a class="btn ghost" href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">WhatsApp</a></div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
@@ -91,11 +104,11 @@ footer a{color:var(--muted);text-decoration:none;margin-left:18px}
     <span class="eyebrow">Implementador de IA</span>
     <h1>Haz que la <em>inteligencia artificial</em> trabaje para tu negocio</h1>
     <p>Me cuentas qué te quita tiempo en tu negocio y yo te digo si la IA lo resuelve, cuánto cuesta y en cuántas semanas. Si no conviene, también te lo digo. Construyo con mi equipo de <a href="https://fixter.org" target="_blank" rel="noopener">fixter.org</a>.</p>
-    <a class="btn" href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda una lluvia de ideas</a>
+    <div class="ctas"><a class="btn" href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">Escríbeme por WhatsApp</a><a class="btn ghost" href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">o agenda una llamada</a></div>
   </div>
   <figure class="photo">
-    <img src="/img/hector.jpg" alt="Héctor Bliss" width="420" height="560">
-    <figcaption><b>Héctor Bliss</b><span>Ciudad de México · con el equipo de fixter.org</span></figcaption>
+    <img src="/img/hector.jpg" alt="Héctor (blissmo) Campos" width="420" height="560">
+    <figcaption><b>Héctor (blissmo) Campos</b><span>Ciudad de México · con el equipo de fixter.org</span></figcaption>
   </figure>
 </div></header>
 
@@ -141,15 +154,27 @@ footer a{color:var(--muted);text-decoration:none;margin-left:18px}
   <details><summary>¿Qué pasa con la seguridad de mis datos?</summary><p>Es prioritaria: datos cifrados en tránsito y en reposo, control de acceso, cumplimiento de mejores prácticas de protección de datos, hosting en infraestructura confiable y revisiones regulares de seguridad. Trabajo con proveedores de IA que cumplen estándares internacionales.</p></details>
 </div></section>
 
+<section id="escritos"><div class="wrap">
+  <h2>Lo último que he escrito</h2>
+  <p class="lead">Notas cortas sobre agentes, datos y herramientas que no te amarran. <a href="/posts/">Ver todo el blog</a>.</p>
+  <div class="grid posts">
+<!-- ultimo:start -->
+    <div class="card"><time datetime="2025-09-08">7 de septiembre de 2025</time><h3><a href="/posts/TikTok_Libera_Tus_Datos_Pero_Solo_Si_Vives_en_Europa/">TikTok Libera Tus Datos... Pero Solo Si Vives en Europa</a></h3><p>Lo que le pasa a un usuario de TikTok le pasa a cualquier negocio con su CRM, su tienda en línea o su sistema de factura…</p></div>
+    <div class="card"><time datetime="2025-09-04">3 de septiembre de 2025</time><h3><a href="/posts/El_Fascinante_Ecosistema_de_LimeSurvey_y_Sistemas_Open_Sourc/">El Fascinante Ecosistema de LimeSurvey y Sistemas Open Source Auto-Instalables con API</a></h3><p>Si tu negocio depende de encuestas, analytics o automatizaciones, la pregunta no es qué herramienta está de moda sino cu…</p></div>
+    <div class="card"><time datetime="2025-08-24">23 de agosto de 2025</time><h3><a href="/posts/Frameworks_de_IA_para_TypeScript_Mas_Alla_de_Python/">Frameworks de IA para TypeScript: Más Allá de Python</a></h3><p>Si vienes del mundo JavaScript/TypeScript, trabajar con AutoGen o LangChain puede sentirse como nadar contracorriente. A…</p></div>
+<!-- ultimo:end -->
+  </div>
+</div></section>
+
 <section class="cta" id="contacto"><div class="wrap">
   <h2>¿Listo para dar el primer paso?</h2>
   <p>Agenda una llamada de 30 minutos sin costo. Hablamos de tu negocio, tus desafíos y cómo la IA puede ayudarte. Sin jerga técnica, sin compromiso.</p>
-  <a class="btn" href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda una lluvia de ideas</a>
+  <div class="ctas"><a class="btn" href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">Escríbeme por WhatsApp</a><a class="btn ghost" href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">o agenda una llamada</a></div>
 </div></section>
 
 <footer><div class="wrap">
-  <span>© 2026 Héctor Bliss · con el equipo de <a href="https://fixter.org" target="_blank" rel="noopener" style="margin:0">fixter.org</a></span>
-  <span><a href="/posts/">Blog</a><a href="https://calendar.app.google/uUvW66HUfoSTuNhYA" target="_blank" rel="noopener">Agenda</a></span>
+  <span>© 2026 Héctor (blissmo) Campos · con el equipo de <a href="https://fixter.org" target="_blank" rel="noopener" style="margin:0">fixter.org</a></span>
+  <span><a href="/posts/">Blog</a><a href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:contacto@fixter.org">Correo</a></span>
 </div></footer>
 <script>
 // Claro por default; el switch guarda la elección en localStorage
