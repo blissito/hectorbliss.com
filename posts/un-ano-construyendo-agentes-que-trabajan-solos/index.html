@@ -5,13 +5,13 @@
 <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Un año construyendo agentes que trabajan solos · Héctor (blissmo) Campos</title>
-<meta name="description" content="Un año construyendo agentes que trabajan solos. Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo. Es ">
+<meta name="description" content="Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo Es Sofi, la vendedora de una distribuidora de químic">
 <link rel="canonical" href="https://hectorbliss.com/posts/un-ano-construyendo-agentes-que-trabajan-solos/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="article"><meta property="og:site_name" content="hectorbliss.com"><meta property="og:locale" content="es_MX"><meta property="og:url" content="https://hectorbliss.com/posts/un-ano-construyendo-agentes-que-trabajan-solos/">
-<meta property="og:title" content="Un año construyendo agentes que trabajan solos"><meta property="og:description" content="Un año construyendo agentes que trabajan solos. Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo. Es "><meta property="og:image" content="https://hectorbliss.com/img/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Un año construyendo agentes que trabajan solos"><meta name="twitter:description" content="Un año construyendo agentes que trabajan solos. Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo. Es "><meta name="twitter:image" content="https://hectorbliss.com/img/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Un año construyendo agentes que trabajan solos","description":"Un año construyendo agentes que trabajan solos. Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo. Es ","datePublished":"2026-09-18T22:41:42.430Z","dateModified":"2026-09-18T22:41:42.430Z","inLanguage":"es-MX","image":"https://hectorbliss.com/img/og.png","mainEntityOfPage":"https://hectorbliss.com/posts/un-ano-construyendo-agentes-que-trabajan-solos/","author":{"@type":"Person","@id":"https://hectorbliss.com/#person","name":"Héctor (blissmo) Campos","url":"https://hectorbliss.com/"}}</script>
+<meta property="og:title" content="Un año construyendo agentes que trabajan solos"><meta property="og:description" content="Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo Es Sofi, la vendedora de una distribuidora de químic"><meta property="og:image" content="https://hectorbliss.com/blog-img/agentes/portada.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Un año construyendo agentes que trabajan solos"><meta name="twitter:description" content="Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo Es Sofi, la vendedora de una distribuidora de químic"><meta name="twitter:image" content="https://hectorbliss.com/blog-img/agentes/portada.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Un año construyendo agentes que trabajan solos","description":"Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo Es Sofi, la vendedora de una distribuidora de químic","datePublished":"2026-09-18T22:41:42.430Z","dateModified":"2026-09-18T22:46:06.294Z","inLanguage":"es-MX","image":"https://hectorbliss.com/blog-img/agentes/portada.jpg","mainEntityOfPage":"https://hectorbliss.com/posts/un-ano-construyendo-agentes-que-trabajan-solos/","author":{"@type":"Person","@id":"https://hectorbliss.com/#person","name":"Héctor (blissmo) Campos","url":"https://hectorbliss.com/"}}</script>
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,6 +24,7 @@
 :root[data-theme="dark"] .theme-toggle .sun{display:none}
 :root[data-theme="dark"] .theme-toggle .moon{display:block}
 .navr{display:flex;align-items:center}
+.posts .card .thumb{width:100%;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line);margin-bottom:12px;display:block}
 .posts .card time{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}.posts .card h3 a{text-decoration:none;color:inherit}.posts .card h3 a:hover{color:var(--acc)}#escritos .lead a{color:var(--acc)}
 #construyo .grid{grid-template-columns:repeat(4,1fr)}#construyo .card h3 a{text-decoration:none;color:var(--acc)}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0}
@@ -89,13 +90,17 @@ footer a{color:var(--muted);text-decoration:none;margin-left:18px}
 .post p,.post li{font-size:1.06rem}
 .post a{color:var(--acc)}
 .post img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.post img.cover{width:100%;aspect-ratio:1200/630;object-fit:cover;margin:0 0 28px}
+.post figure,.post p:has(>img){margin:28px 0}
 .post pre{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:.9rem}
 .post code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .post blockquote{border-left:4px solid var(--acc);margin:0;padding:4px 18px;color:var(--muted)}
 .post table{border-collapse:collapse;width:100%;font-size:.95rem}.post td,.post th{border:1px solid var(--line);padding:8px 10px;text-align:left}
 .post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
 .list{max-width:760px;margin:0 auto;padding:56px 20px}
-.list article{border-top:1px solid var(--line);padding:26px 0}
+.list article{border-top:1px solid var(--line);padding:26px 0;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
+.list .thumb{width:180px;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+@media (max-width:640px){.list article{grid-template-columns:1fr}.list .thumb{width:100%}}
 .list h2{font-size:1.4rem;margin-bottom:6px}.list h2 a{text-decoration:none}.list h2 a:hover{color:var(--acc)}
 .list .meta{color:var(--muted);font-size:.9rem}.list p{color:var(--muted);margin:8px 0 0}
 </style>
@@ -107,14 +112,27 @@ footer a{color:var(--muted);text-decoration:none;margin-left:18px}
   <div class="navr"><button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
   <a class="btn ghost" href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">WhatsApp</a></div>
 </div></nav>
-<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>Un año construyendo agentes que trabajan solos</h1><div class="meta">18 de septiembre de 2026 · Héctor (blissmo) Campos</div><p>Un año construyendo agentes que trabajan solos. Recuento, por si estás decidiendo si meter IA en tu operación.</p>
-<p>El caso que más me enseñó no es un demo. Es Sofi, la vendedora de una distribuidora de químicos de limpieza en Hidalgo. Sofi atiende WhatsApp: recibe el pedido, arma la cotización en PDF con precios validados contra el catálogo, avisa si el cliente entra en la ruta de reparto gratis, registra el lead en el CRM y pide el comprobante de pago. Más de 1,000 conversaciones desde mayo, 2,200 cotizaciones enviadas, y un humano que sólo entra cuando Sofi lo pide.</p>
-<p>Para que Sofi exista tuve que resolver primero dónde corre. De ahí salió Easybits: cada agente en su propia microVM, se pausa, se reanuda y se audita, en pesos. Encima corren Ghosty, que vende tu catálogo en el chat; Formmy, que atiende en tu sitio y en WhatsApp; y Mailmask, que procesa correo en tu dominio.</p>
-<p>Tres cosas que no salen en los tutoriales:
-• El modelo casi nunca es el problema. El problema es qué pasa a las 3 de la mañana cuando se cae con una cotización a medias.
-• Un agente que no puedes pausar y leer paso a paso no lo puedes poner frente a un cliente. Lo aprendí el día que uno mandó 58 cotizaciones idénticas en una noche.
-• Casi nada de lo que una empresa quiere automatizar es conversación. Es cotizar, rutear, capturar, avisar. Eso necesita menos LLM del que la gente cree y más plomería.</p>
-<p>Esas mismas piezas son las que integro en otras empresas. Entrego cada dos semanas y entreno al equipo que lo va a operar.</p>
+<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>Un año construyendo agentes que trabajan solos</h1><div class="meta">18 de septiembre de 2026 · Héctor (blissmo) Campos</div><img class="cover" src="/blog-img/agentes/portada.jpg" alt="" width="1200" height="630"><p>Recuento, por si estás decidiendo si meter IA en tu operación.</p>
+<h2>El caso que más me enseñó no es un demo</h2>
+<p>Es Sofi, la vendedora de una distribuidora de químicos de limpieza en Hidalgo. Sofi atiende WhatsApp: recibe el pedido, arma la cotización en PDF con precios validados contra el catálogo, avisa si el cliente entra en la ruta de reparto gratis, registra el lead en el CRM y pide el comprobante de pago. Más de 1,000 conversaciones desde mayo, 2,200 cotizaciones enviadas, y un humano que sólo entra cuando Sofi lo pide.</p>
+<p><img src="/blog-img/agentes/chat-ghosty.jpg" alt="Así se ve una venta completa con Ghosty en WhatsApp: cotización, entrega y comprobante"></p>
+<h2>Primero, dónde corren</h2>
+<p>Para que Sofi exista tuve que resolver dónde vive un agente que trabaja días sin morirse, sin pagar en dólares por minuto y sin perder el rastro de lo que hizo. De ahí salió Easybits: cada agente en su propia microVM, se pausa, se reanuda y se audita. En pesos.</p>
+<p><img src="/blog-img/agentes/easybits.jpg" alt="Easybits: un endpoint MCP, una flota de microVMs por agente"></p>
+<h2>Encima de eso: Ghosty, Formmy y Mailmask</h2>
+<p>Ghosty vende tu catálogo en el chat y se acuerda de cada cliente. Formmy atiende en tu sitio y en WhatsApp con la información de tu negocio. Mailmask procesa correo en tu dominio sin pagar por persona.</p>
+<p><img src="/blog-img/agentes/ghosty.jpg" alt="Ghosty"></p>
+<p><img src="/blog-img/agentes/formmy.jpg" alt="Formmy"></p>
+<h2>Tres cosas que no salen en los tutoriales</h2>
+<ul>
+<li>El modelo casi nunca es el problema. El problema es qué pasa a las 3 de la mañana cuando se cae con una cotización a medias.</li>
+<li>Un agente que no puedes pausar y leer paso a paso no lo puedes poner frente a un cliente. Lo aprendí el día que uno mandó 58 cotizaciones idénticas en una noche.</li>
+<li>Casi nada de lo que una empresa quiere automatizar es conversación. Es cotizar, rutear, capturar, avisar. Eso necesita menos LLM del que la gente cree y más plomería.</li>
+</ul>
+<p><img src="/blog-img/agentes/ghosty-cortinilla.jpg" alt="Ghosty contesta, cotiza y cobra"></p>
+<h2>Lo mismo, en tu empresa</h2>
+<p>Esas mismas piezas son las que integro en otras empresas: asistentes con tus datos, procesos que hoy hace una persona a mano, agentes conectados a WhatsApp y CRM. Entrego cada dos semanas y entreno al equipo que lo va a operar.</p>
+<p><img src="/blog-img/agentes/ventas.jpg" alt="ventas.ghosty.studio"></p>
 <p>Si tienes un proceso que hoy hace una persona a mano y quieres verlo corriendo así, <a href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com">escríbeme por WhatsApp</a> o a <a href="mailto:contacto@fixter.org">contacto@fixter.org</a>.</p>
 </main>
 <footer><div class="wrap">

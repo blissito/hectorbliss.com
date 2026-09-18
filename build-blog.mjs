@@ -33,13 +33,17 @@ const extraCss = `<style>
 .post p,.post li{font-size:1.06rem}
 .post a{color:var(--acc)}
 .post img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.post img.cover{width:100%;aspect-ratio:1200/630;object-fit:cover;margin:0 0 28px}
+.post figure,.post p:has(>img){margin:28px 0}
 .post pre{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:.9rem}
 .post code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .post blockquote{border-left:4px solid var(--acc);margin:0;padding:4px 18px;color:var(--muted)}
 .post table{border-collapse:collapse;width:100%;font-size:.95rem}.post td,.post th{border:1px solid var(--line);padding:8px 10px;text-align:left}
 .post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
 .list{max-width:760px;margin:0 auto;padding:56px 20px}
-.list article{border-top:1px solid var(--line);padding:26px 0}
+.list article{border-top:1px solid var(--line);padding:26px 0;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
+.list .thumb{width:180px;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+@media (max-width:640px){.list article{grid-template-columns:1fr}.list .thumb{width:100%}}
 .list h2{font-size:1.4rem;margin-bottom:6px}.list h2 a{text-decoration:none}.list h2 a:hover{color:var(--acc)}
 .list .meta{color:var(--muted);font-size:.9rem}.list p{color:var(--muted);margin:8px 0 0}
 </style>`;
@@ -102,6 +106,7 @@ for (const cfg of POSTS) {
   // imágenes: descargar o quitar
   let n = 0; const imgs = [...md.matchAll(/!\[([^\]]*)\]\(([^)\s]+)[^)]*\)/g)];
   for (const m of imgs) {
+    if (m[2].startsWith("/")) { n++; continue; } // ya es local
     const local = await bajarImagen(m[2], cfg.slug, ++n);
     md = md.replace(m[0], local ? `![${m[1]}](${local})` : "");
   }
@@ -111,19 +116,22 @@ for (const cfg of POSTS) {
     if (id) html = `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${id}" title="Video" allowfullscreen loading="lazy"></iframe>` + html;
   }
   const desc = md.replace(/[#*>`\[\]()!_-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 155);
-  const body = `<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · Héctor (blissmo) Campos</div>${html}</main>`;
+  const cover = p.cover || null;
+  const coverAbs = cover ? `https://hectorbliss.com${cover}` : "https://hectorbliss.com/img/og.png";
+  const heroImg = cover ? `<img class="cover" src="${cover}" alt="" width="1200" height="630">` : "";
+  const body = `<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · Héctor (blissmo) Campos</div>${heroImg}${html}</main>`;
   mkdirSync(`posts/${cfg.slug}`, { recursive: true });
-  const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: desc, datePublished: new Date(p.createdAt).toISOString(), dateModified: new Date(p.updatedAt || p.createdAt).toISOString(), inLanguage: "es-MX", image: "https://hectorbliss.com/img/og.png", mainEntityOfPage: `https://hectorbliss.com/posts/${cfg.slug}/`, author: { "@type": "Person", "@id": "https://hectorbliss.com/#person", name: "Héctor (blissmo) Campos", url: "https://hectorbliss.com/" } };
-  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script type="application/ld+json">${JSON.stringify(ld)}</script>`));
-  lista.push({ slug: cfg.slug, title: p.title, createdAt: p.createdAt, desc, imgs: n });
+  const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: desc, datePublished: new Date(p.createdAt).toISOString(), dateModified: new Date(p.updatedAt || p.createdAt).toISOString(), inLanguage: "es-MX", image: coverAbs, mainEntityOfPage: `https://hectorbliss.com/posts/${cfg.slug}/`, author: { "@type": "Person", "@id": "https://hectorbliss.com/#person", name: "Héctor (blissmo) Campos", url: "https://hectorbliss.com/" } };
+  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script type="application/ld+json">${JSON.stringify(ld)}</script>`).replace(/https:\/\/hectorbliss\.com\/img\/og\.png/g, coverAbs));
+  lista.push({ slug: cfg.slug, title: p.title, createdAt: p.createdAt, desc, imgs: n, cover, coverAbs });
   console.log("ok", cfg.slug, `${n} img`);
 }
 await c.close();
 lista.sort((a, b) => b.createdAt - a.createdAt);
-const items = lista.map((x) => `<article><h2><a href="/posts/${x.slug}/">${esc(x.title)}</a></h2><div class="meta">${fecha(x.createdAt)}</div><p>${esc(x.desc)}…</p></article>`).join("\n");
+const items = lista.map((x) => `<article>${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<div><h2><a href="/posts/${x.slug}/">${esc(x.title)}</a></h2><div class="meta">${fecha(x.createdAt)}</div><p>${esc(x.desc)}…</p></div></article>`).join("\n");
 writeFileSync("posts/index.html", page("Blog", "Notas sobre IA aplicada a negocios, agentes y herramientas que no te amarran.", `<main class="list"><span class="eyebrow">Blog</span><h1 style="font-size:2.4rem;margin-bottom:8px">Lo que he aprendido construyendo con IA</h1><p class="lead">Seis piezas que siguen valiendo. Lo demás está en <a href="https://blog.hectorbliss.com" style="color:var(--acc)">blog.hectorbliss.com</a>.</p>${items}</main>`, "https://hectorbliss.com/posts/"));
 // Home: "Lo último que he escrito" entre marcadores
-const ultimos = lista.slice(0, 3).map((x) => `    <div class="card"><time datetime="${new Date(x.createdAt).toISOString().slice(0,10)}">${fecha(x.createdAt)}</time><h3><a href="/posts/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(x.desc.slice(0, 120))}…</p></div>`).join("\n");
+const ultimos = lista.slice(0, 3).map((x) => `    <div class="card">${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<time datetime="${new Date(x.createdAt).toISOString().slice(0,10)}">${fecha(x.createdAt)}</time><h3><a href="/posts/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(x.desc.slice(0, 120))}…</p></div>`).join("\n");
 const home = readFileSync("index.html", "utf8").replace(/<!-- ultimo:start -->[\s\S]*?<!-- ultimo:end -->/, `<!-- ultimo:start -->\n${ultimos}\n<!-- ultimo:end -->`);
 writeFileSync("index.html", home);
 console.log("index con", lista.length, "posts; home con", Math.min(3, lista.length), "últimos");
