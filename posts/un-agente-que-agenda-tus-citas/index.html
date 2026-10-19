@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un agente que agenda, cobra y recuerda citas sin equivocarse · Héctor (blissmo) Campos</title>
+<meta name="description" content="¿Puede un agente de IA agendar citas sin meter la pata? Sí, si revisa disponibilidad antes, pide confirmación y el resumen sale de la base, no del modelo.">
+<link rel="canonical" href="https://hectorbliss.com/posts/un-agente-que-agenda-tus-citas/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article"><meta property="og:site_name" content="hectorbliss.com"><meta property="og:locale" content="es_MX"><meta property="og:url" content="https://hectorbliss.com/posts/un-agente-que-agenda-tus-citas/">
+<meta property="og:title" content="Un agente que agenda, cobra y recuerda citas sin equivocarse"><meta property="og:description" content="¿Puede un agente de IA agendar citas sin meter la pata? Sí, si revisa disponibilidad antes, pide confirmación y el resumen sale de la base, no del modelo."><meta property="og:image" content="https://hectorbliss.com/blog-img/un-agente-que-agenda-tus-citas-cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Un agente que agenda, cobra y recuerda citas sin equivocarse"><meta name="twitter:description" content="¿Puede un agente de IA agendar citas sin meter la pata? Sí, si revisa disponibilidad antes, pide confirmación y el resumen sale de la base, no del modelo."><meta name="twitter:image" content="https://hectorbliss.com/blog-img/un-agente-que-agenda-tus-citas-cover.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Un agente que agenda, cobra y recuerda citas sin equivocarse","description":"¿Puede un agente de IA agendar citas sin meter la pata? Sí, si revisa disponibilidad antes, pide confirmación y el resumen sale de la base, no del modelo.","datePublished":"2026-10-19T18:01:00.000Z","dateModified":"2026-10-19T18:01:00.000Z","inLanguage":"es-MX","image":"https://hectorbliss.com/blog-img/un-agente-que-agenda-tus-citas-cover.jpg","mainEntityOfPage":"https://hectorbliss.com/posts/un-agente-que-agenda-tus-citas/","author":{"@type":"Person","@id":"https://hectorbliss.com/#person","name":"Héctor (blissmo) Campos","url":"https://hectorbliss.com/"}}</script>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ee;--bg2:#ffffff;--line:#e2ded4;--fg:#14191d;--muted:#5d6b71;--acc:#1f9e86;--acc2:#4c8a2c;--ink:#ffffff;--nav:rgba(246,244,238,.85);--shadow:rgba(31,158,134,.25)}
+:root[data-theme="dark"]{--bg:#0e1317;--bg2:#151c22;--line:#25313a;--fg:#f2f5f4;--muted:#9aa8ae;--acc:#85ddcb;--acc2:#8dcf6e;--ink:#0e1317;--nav:rgba(14,19,23,.85);--shadow:rgba(133,221,203,.25)}
+.theme-toggle{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:10px;width:40px;height:40px;cursor:pointer;display:grid;place-items:center;margin-right:12px}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .moon{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .moon{display:block}
+.navr{display:flex;align-items:center}
+.posts .card .thumb{width:100%;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line);margin-bottom:12px;display:block}
+.posts .card time{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}.posts .card h3 a{text-decoration:none;color:inherit}.posts .card h3 a:hover{color:var(--acc)}#escritos .lead a{color:var(--acc)}
+#construyo .grid{grid-template-columns:repeat(4,1fr)}#construyo .card h3 a{text-decoration:none;color:var(--acc)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;background:var(--nav);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;text-decoration:none;font-size:1.1rem}
+.brand span{color:var(--acc)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.95rem}
+nav ul a{text-decoration:none;color:var(--muted)}
+nav ul a:hover{color:var(--fg)}
+.btn{display:inline-block;background:var(--acc);color:var(--ink);font-weight:600;text-decoration:none;padding:14px 26px;border-radius:12px;border:2px solid var(--acc);box-shadow:6px 6px 0 var(--shadow);transition:transform .15s}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn.ghost{background:transparent;color:var(--acc);box-shadow:none}
+.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:14px}
+.hero{padding:88px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.2rem)}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p a,.lead a{color:var(--acc);text-decoration:underline;text-underline-offset:3px}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:52ch;margin:22px 0 30px}
+.photo{position:relative;margin:0}
+.photo img{width:100%;max-width:420px;height:auto;display:block;border-radius:24px;border:3px solid var(--line);box-shadow:14px 14px 0 var(--acc);margin-left:auto}
+.photo figcaption{position:absolute;left:0;bottom:-18px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:.9rem}
+.photo figcaption b{display:block;color:var(--fg)}
+.photo figcaption span{color:var(--muted)}
+section{padding:80px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:12px}
+.lead{color:var(--muted);font-size:1.1rem;max-width:64ch;margin:0 0 40px}
+.problem{background:var(--bg2)}
+.problem p{max-width:68ch;color:var(--muted);font-size:1.1rem}
+.problem strong{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.card h3{font-size:1.2rem;margin-bottom:10px}
+.card p{color:var(--muted);margin:0;font-size:.98rem}
+.art{display:block;width:100%;height:120px;margin:-4px 0 18px;overflow:visible}
+.art>g{filter:drop-shadow(5px 5px 0 var(--fg));transition:transform .25s cubic-bezier(.3,1.6,.5,1);transform-box:fill-box;transform-origin:center}
+.card:hover .art>g{transform:rotate(-3deg) translateY(-4px)}
+.art .s{stroke:var(--fg);stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.art .a{fill:var(--acc)}.art .b{fill:var(--acc2)}.art .p{fill:var(--bg2)}.art .k{fill:var(--fg)}.art .r{fill:#e5484d}.art .n{fill:none}
+.art .sp{stroke:var(--bg2);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.card .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--acc);color:var(--ink);font-weight:800;margin-bottom:16px;font-family:"Bricolage Grotesque",sans-serif}
+.steps{grid-template-columns:repeat(4,1fr)}
+.faq details{border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px;background:var(--bg2)}
+.faq summary{cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--acc);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin:12px 0 0}
+.cta{text-align:center;padding:96px 0}
+.cta h2{font-size:clamp(2rem,4.5vw,3.2rem)}
+.cta p{color:var(--muted);max-width:56ch;margin:16px auto 32px;font-size:1.1rem}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+@media (max-width:820px){#construyo .grid{grid-template-columns:1fr}.hero .wrap{grid-template-columns:1fr}.photo img{margin:0 auto}.photo figcaption{left:50%;transform:translateX(-50%);max-width:calc(100% - 24px);width:max-content}.grid,.steps{grid-template-columns:1fr}nav ul{display:none}.hero{padding:56px 0}}
+</style>
+<style>
+.post{max-width:760px;margin:0 auto;padding:56px 20px}
+.post h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:14px}
+.post .meta{color:var(--muted);margin-bottom:36px}
+.post h2{font-size:1.6rem;margin:44px 0 12px}
+.post h3{font-size:1.25rem;margin:32px 0 10px}
+.post p,.post li{font-size:1.06rem}
+.post a{color:var(--acc)}
+.post img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.post img.cover{width:100%;aspect-ratio:1200/630;object-fit:cover;margin:0 0 28px}
+.post figure,.post p:has(>img){margin:28px 0}
+.post pre{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:.9rem}
+.post code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.post blockquote{border-left:4px solid var(--acc);margin:0;padding:4px 18px;color:var(--muted)}
+.post table{border-collapse:collapse;width:100%;font-size:.95rem}.post td,.post th{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
+.list{max-width:760px;margin:0 auto;padding:56px 20px}
+.list article{border-top:1px solid var(--line);padding:26px 0;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
+.list article.no-thumb{grid-template-columns:1fr}
+.list .thumb{width:180px;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+@media (max-width:640px){.list article{grid-template-columns:1fr}.list .thumb{width:100%}}
+.list h2{font-size:1.4rem;margin-bottom:6px}.list h2 a{text-decoration:none}.list h2 a:hover{color:var(--acc)}
+.list .meta{color:var(--muted);font-size:.9rem}.list p{color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/#">hector<span>bliss</span></a>
+  <ul><li><a href="/#construyo">Construyo</a></li><li><a href="/#servicios">Servicios</a></li><li><a href="/#proceso">Proceso</a></li><li><a href="/#faq">Preguntas</a></li><li><a href="/#escritos">Escritos</a></li><li><a href="/posts/">Blog</a></li></ul>
+  <div class="navr"><button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="btn ghost" href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">WhatsApp</a></div>
+</div></nav>
+<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>Un agente que agenda, cobra y recuerda citas sin equivocarse</h1><div class="meta">19 de octubre de 2026 · Héctor (blissmo) Campos</div><img class="cover" src="/blog-img/un-agente-que-agenda-tus-citas-cover.jpg" alt="" width="1200" height="630"><p>La mitad de los negocios con los que hablo tienen el mismo hueco: una persona contesta WhatsApp para agendar, otra persona llama un día antes para recordar, y nadie sabe cuántas citas se perdieron por no contestar a tiempo. Un agente puede hacer ese trabajo. El riesgo es que lo haga mal frente a tus clientes.</p>
+<p>Construyo Deník, una agenda para negocios (salones, clínicas, estudios, consultorios). Este post cuenta cómo hice que un agente de IA pueda agendar, reagendar y cancelar citas en Deník sin que yo tenga miedo de dejarlo solo. Las reglas sirven para cualquier agente que escriba en un sistema de citas, uses Deník o no.</p>
+<h2>La agenda tiene que existir antes que el agente</h2>
+<p>Un agente no sustituye a la agenda. Si las citas viven en una libreta, en un Excel y en la memoria de la recepcionista, el agente no tiene dónde revisar si el jueves a las 5 está libre.</p>
+<p>En Deník la agenda ya hace tres cosas sin IA:</p>
+<ul>
+<li><strong>Avisos automáticos al cliente.</strong> Al agendar sale un correo con la cita. 12 horas antes se puede pedir que confirme asistencia, 4 horas antes sale el recordatorio y 10 minutos después de terminar llega una encuesta de satisfacción. Los avisos de cita agendada, confirmación, recordatorio y cancelación también pueden ir por WhatsApp.</li>
+<li><strong>Cobro en línea con MercadoPago</strong>, con 1 % de comisión de Deník por transacción.</li>
+<li><strong>Expediente del cliente</strong>, con historial de citas.</li>
+</ul>
+<p>El agente entra encima de eso. Lo que hace es lo que haría una persona en el panel, con las mismas reglas.</p>
+<h2>El agente revisa disponibilidad antes de proponer un horario</h2>
+<p>El error más caro de un agente de citas es prometer un horario que no existe. Por eso la primera regla es de orden: primero se consulta la disponibilidad y después se crea la cita.</p>
+<p>Deník expone su agenda por MCP, el protocolo estándar con el que Claude, ChatGPT y otros asistentes se conectan a herramientas externas. El servidor está en <code>https://www.denik.me/mcp</code> y entra con OAuth: el asistente nunca ve tu contraseña. Trae 20 herramientas, entre ellas:</p>
+<ul>
+<li><code>check_availability</code> para revisar horarios libres.</li>
+<li><code>create_appointment</code>, <code>reschedule_appointment</code> y <code>cancel_appointment</code>.</li>
+<li><code>list_upcoming_appointments</code> y <code>today_summary</code> para ver la agenda.</li>
+<li><code>mark_attendance</code> para marcar si el cliente llegó.</li>
+<li><code>sales_summary</code> para el resumen de ventas.</li>
+<li><code>search_customers</code> para buscar clientes.</li>
+</ul>
+<p>Las instrucciones del servidor le dicen al modelo, literal: «check_availability before create_appointment». Si diseñas tu propio servidor de herramientas, pon el orden en las instrucciones y en la descripción de cada herramienta. El modelo lo lee en cada conversación.</p>
+<h2>Escribir en la agenda notifica a tus clientes, por eso se confirma</h2>
+<p>Leer la agenda no tiene riesgo. Escribir sí: cuando el agente agenda, reagenda o cancela, el cliente del negocio recibe el mismo correo o WhatsApp que si lo hubieras hecho tú. Un agente que cancela la cita equivocada no sólo ensucia la base, le manda un aviso falso a una persona real.</p>
+<p>La regla en Deník es que el asistente pide confirmación antes de agendar, reagendar o cancelar. En el conector de Claude, la página lo dice así: «Antes de agendar, reagendar o cancelar, Claude te pide confirmación; tus clientes reciben los mismos avisos que si lo hicieras en Deník».</p>
+<h2>El resumen que apruebas sale de la base, no del texto del modelo</h2>
+<p>Ésta es la lección que más me costó. Pedir confirmación no basta si lo que confirmas es lo que el modelo dice que va a hacer.</p>
+<p>Imagina que el modelo escribe «voy a cancelar la cita de Ana», pero el identificador que manda apunta a la cita de Pedro. Si la tarjeta de confirmación repite el texto del modelo, apruebas lo de Ana y se cancela lo de Pedro.</p>
+<p>En Deník la capa de confirmación funciona en tres pasos:</p>
+<ol>
+<li><strong>La puerta.</strong> Antes de ejecutar una escritura delicada, Deník la guarda como pendiente y le responde al agente que quedó por aprobar.</li>
+<li><strong>El resumen.</strong> La tarjeta se arma resolviendo los datos en la base: quién, qué servicio, qué día. También dice los efectos que la gente no anticipa, como «se le enviará un correo».</li>
+<li><strong>La ejecución.</strong> Al aprobar, Deník ejecuta lo que guardó, sin volver a pedirle nada al modelo. Pedirle que reintente sería darle otra oportunidad de llamar distinto.</li>
+</ol>
+<p>Si construyes un agente que escribe en cualquier sistema (citas, pedidos, facturas), copia ese patrón: guarda la acción, arma el resumen desde tus datos y ejecuta lo guardado.</p>
+<h2>Conectar Deník a Claude toma tres pasos</h2>
+<p>Para probarlo con tu propia cuenta:</p>
+<ol>
+<li>En Claude abre los ajustes de conectores y agrega un conector personalizado con la URL <code>https://www.denik.me/mcp</code>.</li>
+<li>Claude te manda a denik.me: entra con tu cuenta y revisa los permisos que pide. Al autorizar regresas a Claude.</li>
+<li>Pregunta algo concreto.</li>
+</ol>
+<p>Peticiones que funcionan bien:</p>
+<ul>
+<li>«¿Qué citas tengo mañana?»</li>
+<li>«Busca un horario libre esta semana para un corte y agéndalo a Ana López.»</li>
+<li>«¿Cuánto vendí en septiembre y cuántos clientes no llegaron?»</li>
+</ul>
+<p>Si tienes varios negocios, Claude trabaja sobre el activo salvo que le pidas otro. La conexión usa OAuth 2.1 con PKCE y un token de una hora que se renueva solo. Para cortar el acceso, desconecta Deník en los conectores de Claude. La guía completa está en <a href="https://www.denik.me/conector-claude">https://www.denik.me/conector-claude</a>.</p>
+<p>En Claude Code es un comando:</p>
+<pre><code class="language-bash">claude mcp add --transport http denik https://www.denik.me/mcp
+</code></pre>
+<h2>El mismo agente vive en el chat del sitio y en el teléfono</h2>
+<p>En los planes Profesional y Premium, Deník trae un chatbot de agendamiento con IA en la página del negocio: 100 conversaciones al mes en Profesional y 500 en Premium. El Profesional suma un agente personal de IA por WhatsApp para el dueño.</p>
+<p>Para el dueño que administra desde el celular está Deník Manager en iOS: <a href="https://apps.apple.com/mx/app/id6816733601">https://apps.apple.com/mx/app/id6816733601</a>. La versión de Android está en prueba cerrada. En las dos apps puedes mandarle una nota de voz a Nik, el asistente de Deník, y toda escritura de Nik pasa por la misma confirmación.</p>
+<p>En Ghosty, la plataforma donde construyo agentes para otros negocios, Deník viene como conexión de casa: una persona conecta su agenda a su agente sin saber qué es un MCP.</p>
+<h2>Lo que salió mal, para que no te pase</h2>
+<p>El 16 de octubre una actualización de React Router de la 7 a la 8 rompió la reserva pública de Deník en producción. Cada vez que alguien elegía fecha, la app respondía error. Estuvo así unas 18 horas y lo detecté yo, no un monitor.</p>
+<p>El agente no tuvo nada que ver: fue la actualización de una dependencia que pasó todas las pruebas por GET y falló en las acciones POST. La lección para cualquier sistema de citas es la misma: después de cada deploy, prueba de punta a punta el flujo con el que tus clientes reservan y pagan. Un monitor que abre un servicio y elige fecha habría avisado en minutos.</p>
+<h2>Lo que cuesta</h2>
+<p>Deník tiene tres planes en pesos: Esencial a $249 al mes, Profesional a $599 y Premium a $1,899. Con pago anual quedan en $199, $479 y $1,519 al mes. La cuenta nueva trae 30 días de prueba. Las notificaciones por WhatsApp incluidas son 150 al mes en Esencial, 400 en Profesional y 1,200 en Premium.</p>
+<p>¿Cuántas citas pierdes a la semana porque nadie contestó a tiempo o porque el cliente olvidó que tenía cita? Crea tu agenda, conéctala a tu asistente y deja que los recordatorios salgan solos en <a href="https://www.denik.me">https://www.denik.me</a>.</p>
+</main>
+<footer><div class="wrap">
+  <span>© 2026 Héctor (blissmo) Campos · con el equipo de <a href="https://fixter.org" target="_blank" rel="noopener" style="margin:0">fixter.org</a></span>
+  <span><a href="/posts/">Blog</a><a href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:contacto@fixter.org">Correo</a></span>
+</div></footer>
+<script>
+// Claro por default; el switch guarda la elección en localStorage
+document.getElementById("themeToggle").addEventListener("click",function(){var r=document.documentElement;var d=r.getAttribute("data-theme")==="dark"?"light":"dark";r.setAttribute("data-theme",d);try{localStorage.setItem("theme",d)}catch(e){}});
+</script>
+</body>
+</html>

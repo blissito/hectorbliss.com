@@ -6,6 +6,11 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { extname } from "node:path";
 
 const POSTS = [
+  { slug: "tu-agente-trabaja-a-su-hora" },
+  { slug: "dale-correo-propio-a-tu-agente" },
+  { slug: "mcp-para-quien-no-programa" },
+  { slug: "un-agente-que-agenda-tus-citas" },
+  { slug: "cuanto-cuesta-un-pr-hecho-por-agentes" },
   { slug: "un-ano-construyendo-agentes-que-trabajan-solos" },
   { slug: "Arquitecturas_de_IA_con_Agentes_Patrones_y_Documentacion_Ofi", strip: /\*{0,2}Nota del autor\*{0,2}[^\n]*\n+/i },
   { slug: "AutoGen_vs_LangChain_Guia_Comparativa_para_Desarrolladores" },
@@ -116,7 +121,7 @@ for (const cfg of POSTS) {
     const id = (p.youtubeLink.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/) || [])[1];
     if (id) html = `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${id}" title="Video" allowfullscreen loading="lazy"></iframe>` + html;
   }
-  const desc = md.replace(/[#*>`\[\]()!_-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 155);
+  const desc = p.excerpt || md.replace(/[#*>`\[\]()!_-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 155);
   const cover = p.cover || null;
   const coverAbs = cover ? `https://hectorbliss.com${cover}` : "https://hectorbliss.com/img/og.png";
   const heroImg = cover ? `<img class="cover" src="${cover}" alt="" width="1200" height="630">` : "";

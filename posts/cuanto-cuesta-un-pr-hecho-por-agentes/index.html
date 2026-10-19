@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuánto cuesta de verdad un PR hecho por agentes de código · Héctor (blissmo) Campos</title>
+<meta name="description" content="¿Cuánto cuesta que agentes de IA hagan un PR? Un pedido me costó 4.32 USD en 4.2 horas de reloj, pero 3.0 de esas horas esperaba a una persona.">
+<link rel="canonical" href="https://hectorbliss.com/posts/cuanto-cuesta-un-pr-hecho-por-agentes/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article"><meta property="og:site_name" content="hectorbliss.com"><meta property="og:locale" content="es_MX"><meta property="og:url" content="https://hectorbliss.com/posts/cuanto-cuesta-un-pr-hecho-por-agentes/">
+<meta property="og:title" content="Cuánto cuesta de verdad un PR hecho por agentes de código"><meta property="og:description" content="¿Cuánto cuesta que agentes de IA hagan un PR? Un pedido me costó 4.32 USD en 4.2 horas de reloj, pero 3.0 de esas horas esperaba a una persona."><meta property="og:image" content="https://hectorbliss.com/blog-img/cuanto-cuesta-un-pr-hecho-por-agentes-cover.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cuánto cuesta de verdad un PR hecho por agentes de código"><meta name="twitter:description" content="¿Cuánto cuesta que agentes de IA hagan un PR? Un pedido me costó 4.32 USD en 4.2 horas de reloj, pero 3.0 de esas horas esperaba a una persona."><meta name="twitter:image" content="https://hectorbliss.com/blog-img/cuanto-cuesta-un-pr-hecho-por-agentes-cover.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Cuánto cuesta de verdad un PR hecho por agentes de código","description":"¿Cuánto cuesta que agentes de IA hagan un PR? Un pedido me costó 4.32 USD en 4.2 horas de reloj, pero 3.0 de esas horas esperaba a una persona.","datePublished":"2026-10-19T18:00:00.000Z","dateModified":"2026-10-19T18:00:00.000Z","inLanguage":"es-MX","image":"https://hectorbliss.com/blog-img/cuanto-cuesta-un-pr-hecho-por-agentes-cover.jpg","mainEntityOfPage":"https://hectorbliss.com/posts/cuanto-cuesta-un-pr-hecho-por-agentes/","author":{"@type":"Person","@id":"https://hectorbliss.com/#person","name":"Héctor (blissmo) Campos","url":"https://hectorbliss.com/"}}</script>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ee;--bg2:#ffffff;--line:#e2ded4;--fg:#14191d;--muted:#5d6b71;--acc:#1f9e86;--acc2:#4c8a2c;--ink:#ffffff;--nav:rgba(246,244,238,.85);--shadow:rgba(31,158,134,.25)}
+:root[data-theme="dark"]{--bg:#0e1317;--bg2:#151c22;--line:#25313a;--fg:#f2f5f4;--muted:#9aa8ae;--acc:#85ddcb;--acc2:#8dcf6e;--ink:#0e1317;--nav:rgba(14,19,23,.85);--shadow:rgba(133,221,203,.25)}
+.theme-toggle{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:10px;width:40px;height:40px;cursor:pointer;display:grid;place-items:center;margin-right:12px}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .moon{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .moon{display:block}
+.navr{display:flex;align-items:center}
+.posts .card .thumb{width:100%;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line);margin-bottom:12px;display:block}
+.posts .card time{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}.posts .card h3 a{text-decoration:none;color:inherit}.posts .card h3 a:hover{color:var(--acc)}#escritos .lead a{color:var(--acc)}
+#construyo .grid{grid-template-columns:repeat(4,1fr)}#construyo .card h3 a{text-decoration:none;color:var(--acc)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;background:var(--nav);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;text-decoration:none;font-size:1.1rem}
+.brand span{color:var(--acc)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.95rem}
+nav ul a{text-decoration:none;color:var(--muted)}
+nav ul a:hover{color:var(--fg)}
+.btn{display:inline-block;background:var(--acc);color:var(--ink);font-weight:600;text-decoration:none;padding:14px 26px;border-radius:12px;border:2px solid var(--acc);box-shadow:6px 6px 0 var(--shadow);transition:transform .15s}
+.btn:hover{transform:translate(-2px,-2px)}
+.btn.ghost{background:transparent;color:var(--acc);box-shadow:none}
+.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:14px}
+.hero{padding:88px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.2rem)}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p a,.lead a{color:var(--acc);text-decoration:underline;text-underline-offset:3px}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:52ch;margin:22px 0 30px}
+.photo{position:relative;margin:0}
+.photo img{width:100%;max-width:420px;height:auto;display:block;border-radius:24px;border:3px solid var(--line);box-shadow:14px 14px 0 var(--acc);margin-left:auto}
+.photo figcaption{position:absolute;left:0;bottom:-18px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:.9rem}
+.photo figcaption b{display:block;color:var(--fg)}
+.photo figcaption span{color:var(--muted)}
+section{padding:80px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:12px}
+.lead{color:var(--muted);font-size:1.1rem;max-width:64ch;margin:0 0 40px}
+.problem{background:var(--bg2)}
+.problem p{max-width:68ch;color:var(--muted);font-size:1.1rem}
+.problem strong{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.card h3{font-size:1.2rem;margin-bottom:10px}
+.card p{color:var(--muted);margin:0;font-size:.98rem}
+.art{display:block;width:100%;height:120px;margin:-4px 0 18px;overflow:visible}
+.art>g{filter:drop-shadow(5px 5px 0 var(--fg));transition:transform .25s cubic-bezier(.3,1.6,.5,1);transform-box:fill-box;transform-origin:center}
+.card:hover .art>g{transform:rotate(-3deg) translateY(-4px)}
+.art .s{stroke:var(--fg);stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.art .a{fill:var(--acc)}.art .b{fill:var(--acc2)}.art .p{fill:var(--bg2)}.art .k{fill:var(--fg)}.art .r{fill:#e5484d}.art .n{fill:none}
+.art .sp{stroke:var(--bg2);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.card .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--acc);color:var(--ink);font-weight:800;margin-bottom:16px;font-family:"Bricolage Grotesque",sans-serif}
+.steps{grid-template-columns:repeat(4,1fr)}
+.faq details{border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px;background:var(--bg2)}
+.faq summary{cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--acc);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin:12px 0 0}
+.cta{text-align:center;padding:96px 0}
+.cta h2{font-size:clamp(2rem,4.5vw,3.2rem)}
+.cta p{color:var(--muted);max-width:56ch;margin:16px auto 32px;font-size:1.1rem}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none;margin-left:18px}
+@media (max-width:820px){#construyo .grid{grid-template-columns:1fr}.hero .wrap{grid-template-columns:1fr}.photo img{margin:0 auto}.photo figcaption{left:50%;transform:translateX(-50%);max-width:calc(100% - 24px);width:max-content}.grid,.steps{grid-template-columns:1fr}nav ul{display:none}.hero{padding:56px 0}}
+</style>
+<style>
+.post{max-width:760px;margin:0 auto;padding:56px 20px}
+.post h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:14px}
+.post .meta{color:var(--muted);margin-bottom:36px}
+.post h2{font-size:1.6rem;margin:44px 0 12px}
+.post h3{font-size:1.25rem;margin:32px 0 10px}
+.post p,.post li{font-size:1.06rem}
+.post a{color:var(--acc)}
+.post img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.post img.cover{width:100%;aspect-ratio:1200/630;object-fit:cover;margin:0 0 28px}
+.post figure,.post p:has(>img){margin:28px 0}
+.post pre{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;overflow:auto;font-size:.9rem}
+.post code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.post blockquote{border-left:4px solid var(--acc);margin:0;padding:4px 18px;color:var(--muted)}
+.post table{border-collapse:collapse;width:100%;font-size:.95rem}.post td,.post th{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
+.list{max-width:760px;margin:0 auto;padding:56px 20px}
+.list article{border-top:1px solid var(--line);padding:26px 0;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
+.list article.no-thumb{grid-template-columns:1fr}
+.list .thumb{width:180px;aspect-ratio:1200/630;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+@media (max-width:640px){.list article{grid-template-columns:1fr}.list .thumb{width:100%}}
+.list h2{font-size:1.4rem;margin-bottom:6px}.list h2 a{text-decoration:none}.list h2 a:hover{color:var(--acc)}
+.list .meta{color:var(--muted);font-size:.9rem}.list p{color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/#">hector<span>bliss</span></a>
+  <ul><li><a href="/#construyo">Construyo</a></li><li><a href="/#servicios">Servicios</a></li><li><a href="/#proceso">Proceso</a></li><li><a href="/#faq">Preguntas</a></li><li><a href="/#escritos">Escritos</a></li><li><a href="/posts/">Blog</a></li></ul>
+  <div class="navr"><button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  <a class="btn ghost" href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">WhatsApp</a></div>
+</div></nav>
+<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>Cuánto cuesta de verdad un PR hecho por agentes de código</h1><div class="meta">19 de octubre de 2026 · Héctor (blissmo) Campos</div><img class="cover" src="/blog-img/cuanto-cuesta-un-pr-hecho-por-agentes-cover.jpg" alt="" width="1200" height="630"><p>¿Cuánto cuesta que un equipo de agentes haga un PR? La respuesta corta es «unos cuantos dólares». La útil es otra: los tokens casi nunca son lo caro. Lo caro es el tiempo que el PR espera a una persona y el PR que se mezcla mal.</p>
+<p>Opero la Software Factory de Ghosty, un equipo de agentes que planea, construye y revisa PRs sobre un repo. Aquí van dos pedidos reales, uno bueno y uno malo, y cómo medir esto en cualquier equipo de agentes.</p>
+<h2>Un pedido sano me costó 4.32 USD y casi todo el reloj fue espera humana</h2>
+<p>La fábrica guarda cada paso de cada pedido. Con <code>--timing</code>, la terminal desglosa dónde se fue el tiempo y el dinero. Éste es el pedido #13, sobre un repo de ejemplo:</p>
+<pre><code class="language-bash">ghosty factory runs show 13 --timing --workspace &lt;tu-espacio&gt;
+# #13 · pr_review · vueltas 0 · CI rojo 0 · $4.32 USD
+# reloj: 4.2 h = trabajando 71.8 min · esperando a una persona 3.0 h · lo demás (CI, colas) 1.3 min
+# hora   paso             tiempo    en tools  model       usd    estado
+# 17:07  @plan (hilo)     1.2 min   0.1 min   opus-5-5    $0.87  done
+# 17:09  @check (crítico) 0.6 min   0.1 min   opus-5-5    $0.51  done
+# 17:10  @build           68.8 min  66 min    sonnet-5-5  $1.82  done
+# Comandos más lentos (≥ 60 s)
+#   17:23 @build 10.3 min  Bash: until grep -q &quot;TC_EXIT…
+</code></pre>
+<p>Tres cosas saltan a la vista:</p>
+<ul>
+<li><strong>Planear costó 0.87 USD y revisar el plan 0.51 USD</strong>, los dos con Opus 5.5. Construir con Sonnet 5.5 costó 1.82 USD en 68.8 minutos. El total del pedido es 4.32 USD porque también incluye el primer turno de planeación en el hilo, antes de que naciera el pedido.</li>
+<li><strong>De los 68.8 minutos de construcción, 66 fueron dentro de herramientas</strong>: correr pruebas, typecheck y esperar resultados. El modelo pensando es la parte chica. Un solo comando que esperaba a que terminara el typecheck se llevó 10.3 minutos.</li>
+<li><strong>De las 4.2 horas de reloj, 3.0 horas fueron esperando a una persona</strong>: que aprobara el plan y que revisara el PR. Los agentes trabajaron 71.8 minutos.</li>
+</ul>
+<p>El cuello de botella fui yo, no el modelo. Para PRs más rápidos, el primer arreglo es aprobar planes más rápido.</p>
+<h2>Separar el reloj en tres partes cambia la conversación</h2>
+<p>La regla que uso para cualquier equipo de agentes, sea mío o no, es partir el tiempo de cada pedido en tres cubetas:</p>
+<ol>
+<li><strong>Trabajando</strong>: algún agente tenía un turno corriendo.</li>
+<li><strong>Esperando a una persona</strong>: un plan o un PR por aprobar.</li>
+<li><strong>Lo demás</strong>: CI, colas y despliegue.</li>
+</ol>
+<p>Si sólo mides el tiempo total, la tentación es pagar un modelo más caro. Con las tres cubetas ves que un modelo más caro ataca, como mucho, los 71.8 minutos de trabajo, y que las 3.0 horas de espera siguen ahí. El costo, igual: anótalo por rol y por modelo, no sólo el total.</p>
+<h2>Un pedido malo costó 8.19 USD y rompió las reservas de Deník 18 horas</h2>
+<p>El 16 de octubre la fábrica atendió un PR de Dependabot que subía React Router de la 7 a la 8 en Deník, la agenda para negocios que también construyo. Tardó 7.0 horas, costó 8.19 USD y tuvo 1 vuelta de corrección.</p>
+<p>El plan aprobado tenía un criterio claro: «la reserva pública de un servicio se completa de punta a punta en la preview del PR». La preview nunca arrancó: faltaban variables de entorno. El revisor probó la reserva en su caja, contra <code>http://localhost:3000</code>, y aprobó. En la descripción del PR quedó escrito «probado en la caja, NO en la preview». La tarjeta se puso verde, se mezcló y se desplegó solo.</p>
+<p>En producción, todo POST de la app respondía 400. React Router 8 cambió su chequeo anti-CSRF: antes comparaba sólo el host del <code>Origin</code>, ahora compara el origen completo con protocolo. Detrás del proxy que termina TLS, la petición llegaba al servidor como <code>http://</code> y el navegador mandaba <code>https://</code>. En localhost no hay proxy, así que el bug no aparecía. Las reservas estuvieron rotas unas 18 horas y lo detecté yo, no un monitor.</p>
+<p>Los 8.19 USD son lo de menos. Lo caro fueron 18 horas sin poder recibir citas.</p>
+<h2>Cinco barandales que valen para cualquier equipo de agentes</h2>
+<p>Del postmortem salieron reglas que sirven con cualquier arnés:</p>
+<ol>
+<li><strong>La evidencia sólo vale si sale del entorno que el criterio nombra.</strong> Si el plan dice «en la preview», el revisor no puede aprobar sin preview lista. Hoy la fábrica rechaza un veredicto aprobatorio sin preview cuando el plan la exige.</li>
+<li><strong>«Probado en local» es un riesgo, no una prueba</strong>, cuando el cambio toca red, cookies, CSRF, proxy o TLS.</li>
+<li><strong>El smoke debe hacer al menos un POST.</strong> El mío revisó 33 rutas por GET y reportó cero diferencias. Lo único roto eran acciones.</li>
+<li><strong>En una versión mayor, el revisor lista cada cambio que rompe compatibilidad y cómo lo descartó.</strong> Leer la guía de migración hasta que compile no basta.</li>
+<li><strong>Prueba el flujo que cobra después de cada deploy.</strong> Un smoke en producción habría avisado en minutos, no en 18 horas.</li>
+</ol>
+<h2>Comparar modelos con tus propios pedidos cuesta menos de 2 USD</h2>
+<p>Los benchmarks públicos no dicen cómo le va a un modelo en tu repo. Un eval de la fábrica vuelve a correr un rol de un pedido ya mezclado con otro modelo, y un juez lo califica contra lo que se hizo de verdad.</p>
+<p>En un pedido chico, el eval de planeación costó 0.49 USD y el eval de revisión costó 1.28 USD. El juez puede costar tanto o más: con un modelo de gama alta, calificar esa revisión costó 1.87 USD porque lee los dos diffs completos. Usa un juez barato y siempre el mismo, para comparar notas en el tiempo. Nunca dejes que un rol se califique a sí mismo: un revisor evaluado se puso 5 de 5.</p>
+<h2>El modelo fuerte planea y el barato construye</h2>
+<p>En la fábrica, Arqui planea y revisa con un modelo fuerte, y Worker construye con uno más barato. Construir es la parte con más turnos y más tokens.</p>
+<p>Si usas DeepSeek V4 Flash para construir, dos detalles bajan la cuenta. Su precio fuera de hora pico es de 0.15 USD por millón de tokens de entrada y 0.60 USD de salida. Y la entrada que cae en su caché cuesta 0.003 USD por millón contra 0.15 sin caché, así que conviene un inicio de prompt estable: la hora, los ids y lo que cambia van al final.</p>
+<h2>Todavía no tengo un promedio honesto por PR mezclado</h2>
+<p>Todavía no tengo un costo promedio por PR mezclado que pueda defender, sólo pedidos sueltos como éstos. Lo que sí hice fue que la fábrica mida cada pedido:</p>
+<pre><code class="language-bash">ghosty factory runs stats --since 30d --workspace &lt;tu-espacio&gt;
+</code></pre>
+<p>Reporta costo por PR mezclado, mediana de minutos hasta el PR y hasta el merge, y vueltas promedio de revisión a construcción. Si armas tu propio equipo de agentes, guarda esas cuatro cifras desde el primer día.</p>
+<p>Para quien quiere la fábrica montada: los planes de lanzamiento son F1 a $1,897 MXN al mes (3 lugares de trabajo y 3 de CI), F2 a $3,794 (5 y 3) y F3 a $5,691 (8 y 5). El montaje a la medida de tu repo cuesta $18,000 MXN en un solo pago.</p>
+<p>¿Tu equipo tiene PRs esperando días a que alguien los haga o los revise? Mide primero dónde se va el tiempo y luego decide qué automatizar. Si quieres verlo corriendo sobre tu repo, revisa los planes en <a href="https://www.ghosty.studio/factory">https://www.ghosty.studio/factory</a>.</p>
+<h2>Fuentes</h2>
+<ul>
+<li>Precios de DeepSeek: <a href="https://api-docs.deepseek.com/quick_start/pricing">https://api-docs.deepseek.com/quick_start/pricing</a></li>
+<li>Caché de contexto de DeepSeek: <a href="https://api-docs.deepseek.com/guides/kv_cache">https://api-docs.deepseek.com/guides/kv_cache</a></li>
+</ul>
+</main>
+<footer><div class="wrap">
+  <span>© 2026 Héctor (blissmo) Campos · con el equipo de <a href="https://fixter.org" target="_blank" rel="noopener" style="margin:0">fixter.org</a></span>
+  <span><a href="/posts/">Blog</a><a href="https://wa.me/527712412825?text=Vengo%20de%20hectorbliss.com" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:contacto@fixter.org">Correo</a></span>
+</div></footer>
+<script>
+// Claro por default; el switch guarda la elección en localStorage
+document.getElementById("themeToggle").addEventListener("click",function(){var r=document.documentElement;var d=r.getAttribute("data-theme")==="dark"?"light":"dark";r.setAttribute("data-theme",d);try{localStorage.setItem("theme",d)}catch(e){}});
+</script>
+</body>
+</html>
