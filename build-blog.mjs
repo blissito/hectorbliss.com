@@ -46,7 +46,7 @@ const extraCss = `<style>
 .post h2{font-size:1.6rem;margin:44px 0 12px}
 .post h3{font-size:1.25rem;margin:32px 0 10px}
 .post p,.post li{font-size:1.06rem}
-.post a{color:var(--acc)}
+.post a{color:var(--acc)}.post a.btn{color:var(--ink);text-decoration:none}
 .post img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
 .post img.cover{width:100%;aspect-ratio:1200/630;object-fit:cover;margin:0 0 28px}
 .post figure,.post p:has(>img){margin:28px 0}
