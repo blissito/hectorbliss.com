@@ -12,15 +12,19 @@ const POSTS = [
   { slug: "un-agente-que-agenda-tus-citas" },
   { slug: "cuanto-cuesta-un-pr-hecho-por-agentes" },
   { slug: "un-ano-construyendo-agentes-que-trabajan-solos" },
-  { slug: "Arquitecturas_de_IA_con_Agentes_Patrones_y_Documentacion_Ofi", strip: /\*{0,2}Nota del autor\*{0,2}[^\n]*\n+/i },
-  { slug: "AutoGen_vs_LangChain_Guia_Comparativa_para_Desarrolladores" },
-  { slug: "Frameworks_de_IA_para_TypeScript_Mas_Alla_de_Python" },
-  { slug: "adios-a-los-frameworks-web" },
-  { slug: "El_Fascinante_Ecosistema_de_LimeSurvey_y_Sistemas_Open_Sourc",
-    intro: "Si tu negocio depende de encuestas, analytics o automatizaciones, la pregunta no es qué herramienta está de moda sino cuál no te amarra: que puedas instalarla tú, sacar tus datos por API y cambiarla sin volver a empezar. Este recorrido es por las que cumplen eso." },
-  { slug: "TikTok_Libera_Tus_Datos_Pero_Solo_Si_Vives_en_Europa",
-    intro: "Lo que le pasa a un usuario de TikTok le pasa a cualquier negocio con su CRM, su tienda en línea o su sistema de facturación: los datos son tuyos sólo si puedes sacarlos. Antes de contratar cualquier herramienta, pregunta cómo te los devuelve." },
 ];
+
+// Posts que salieron del blog: su URL queda como redirect a /posts/ (Pages no da 301)
+const OLD = [
+  "Arquitecturas_de_IA_con_Agentes_Patrones_y_Documentacion_Ofi",
+  "AutoGen_vs_LangChain_Guia_Comparativa_para_Desarrolladores",
+  "Frameworks_de_IA_para_TypeScript_Mas_Alla_de_Python",
+  "adios-a-los-frameworks-web",
+  "El_Fascinante_Ecosistema_de_LimeSurvey_y_Sistemas_Open_Sourc",
+  "TikTok_Libera_Tus_Datos_Pero_Solo_Si_Vives_en_Europa",
+];
+const NAME = "Héctor (@blissito) Campos M.";
+const PERSON = { "@type": "Person", "@id": "https://hectorbliss.com/#person", name: NAME, url: "https://hectorbliss.com/" };
 
 const index = readFileSync("index.html", "utf8");
 const head = index.slice(index.indexOf("<style>"), index.indexOf("</style>") + 8);
@@ -60,7 +64,7 @@ const page = (title, desc, body, canonical, extraHead = "") => `<!doctype html>
 <meta charset="utf-8">
 ${themeBoot}
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} · Héctor (blissmo) Campos</title>
+<title>${esc(title)} · ${NAME}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
 <meta name="robots" content="index,follow">
@@ -84,6 +88,8 @@ ${toggleJs}
 `;
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+// Corta en el último espacio antes de n y agrega «…»
+const recorta = (t, n) => (t.length <= n ? t : t.slice(0, t.lastIndexOf(" ", n)).replace(/[\s,.;:]+$/, "") + "…");
 const fecha = (d) => new Date(d).toLocaleDateString("es-MX", { year: "numeric", month: "long", day: "numeric" });
 
 async function bajarImagen(url, slug, n) {
@@ -121,23 +127,33 @@ for (const cfg of POSTS) {
     const id = (p.youtubeLink.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/) || [])[1];
     if (id) html = `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${id}" title="Video" allowfullscreen loading="lazy"></iframe>` + html;
   }
-  const desc = p.excerpt || md.replace(/[#*>`\[\]()!_-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 155);
+  const desc = p.excerpt || recorta(md.replace(/[#*>`\[\]()!_-]/g, " ").replace(/\s+/g, " ").trim(), 155);
   const cover = p.cover || null;
   const coverAbs = cover ? `https://hectorbliss.com${cover}` : "https://hectorbliss.com/img/og.png";
   const heroImg = cover ? `<img class="cover" src="${cover}" alt="" width="1200" height="630">` : "";
-  const body = `<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · Héctor (blissmo) Campos</div>${heroImg}${html}</main>`;
+  const body = `<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · ${NAME}</div>${heroImg}${html}</main>`;
   mkdirSync(`posts/${cfg.slug}`, { recursive: true });
-  const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: desc, datePublished: new Date(p.createdAt).toISOString(), dateModified: new Date(p.updatedAt || p.createdAt).toISOString(), inLanguage: "es-MX", image: coverAbs, mainEntityOfPage: `https://hectorbliss.com/posts/${cfg.slug}/`, author: { "@type": "Person", "@id": "https://hectorbliss.com/#person", name: "Héctor (blissmo) Campos", url: "https://hectorbliss.com/" } };
-  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script type="application/ld+json">${JSON.stringify(ld)}</script>`).replace(/https:\/\/hectorbliss\.com\/img\/og\.png/g, coverAbs));
+  const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: desc, datePublished: new Date(p.createdAt).toISOString(), dateModified: new Date(p.updatedAt || p.createdAt).toISOString(), inLanguage: "es-MX", image: coverAbs, mainEntityOfPage: `https://hectorbliss.com/posts/${cfg.slug}/`, author: PERSON, publisher: PERSON };
+  const crumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://hectorbliss.com/" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://hectorbliss.com/posts/" },
+    { "@type": "ListItem", position: 3, name: p.title, item: `https://hectorbliss.com/posts/${cfg.slug}/` } ] };
+  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script type="application/ld+json">${JSON.stringify(ld)}</script><script type="application/ld+json">${JSON.stringify(crumbs)}</script>`).replace(/https:\/\/hectorbliss\.com\/img\/og\.png/g, coverAbs));
   lista.push({ slug: cfg.slug, title: p.title, createdAt: p.createdAt, desc, imgs: n, cover, coverAbs });
   console.log("ok", cfg.slug, `${n} img`);
 }
 await c.close();
 lista.sort((a, b) => b.createdAt - a.createdAt);
-const items = lista.map((x) => `<article class="${x.cover ? "" : "no-thumb"}">${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<div><h2><a href="/posts/${x.slug}/">${esc(x.title)}</a></h2><div class="meta">${fecha(x.createdAt)}</div><p>${esc(x.desc)}…</p></div></article>`).join("\n");
-writeFileSync("posts/index.html", page("Blog", "Notas sobre IA aplicada a negocios, agentes y herramientas que no te amarran.", `<main class="list"><span class="eyebrow">Blog</span><h1 style="font-size:2.4rem;margin-bottom:8px">Lo que he aprendido construyendo con IA</h1><p class="lead">Siete piezas que siguen valiendo. Lo demás está en <a href="https://blog.hectorbliss.com" style="color:var(--acc)">blog.hectorbliss.com</a>.</p>${items}</main>`, "https://hectorbliss.com/posts/"));
+const items = lista.map((x) => `<article class="${x.cover ? "" : "no-thumb"}">${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<div><h2><a href="/posts/${x.slug}/">${esc(x.title)}</a></h2><div class="meta">${fecha(x.createdAt)}</div><p>${esc(x.desc)}</p></div></article>`).join("\n");
+const blogLd = { "@context": "https://schema.org", "@type": "Blog", "@id": "https://hectorbliss.com/posts/#blog", name: "Blog de Héctor Campos", url: "https://hectorbliss.com/posts/", inLanguage: "es-MX", author: PERSON, publisher: PERSON,
+  blogPost: lista.map((x) => ({ "@type": "BlogPosting", headline: x.title, url: `https://hectorbliss.com/posts/${x.slug}/`, datePublished: new Date(x.createdAt).toISOString(), image: x.coverAbs })) };
+writeFileSync("posts/index.html", page("Blog", "Notas sobre agentes de IA para negocios: qué cuestan, dónde corren y cómo se conectan a tu correo, tu agenda y tu WhatsApp.", `<main class="list"><span class="eyebrow">Blog</span><h1 style="font-size:2.4rem;margin-bottom:8px">Lo que he aprendido construyendo agentes</h1><p class="lead">Notas sobre agentes de IA que ya trabajan en negocios de verdad. Lo demás está en <a href="https://blog.hectorbliss.com" style="color:var(--acc)">blog.hectorbliss.com</a>.</p>${items}</main>`, "https://hectorbliss.com/posts/", `<script type="application/ld+json">${JSON.stringify(blogLd)}</script>`).replace('content="article"', 'content="website"'));
+for (const slug of OLD) {
+  mkdirSync(`posts/${slug}`, { recursive: true });
+  writeFileSync(`posts/${slug}/index.html`, `<!doctype html><html lang="es-MX"><head><meta charset="utf-8"><title>Blog · ${NAME}</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://hectorbliss.com/posts/"><meta http-equiv="refresh" content="0; url=/posts/"></head><body><p>Este texto ya no está aquí. <a href="/posts/">Ver el blog</a>.</p></body></html>\n`);
+}
 // Home: "Lo último que he escrito" entre marcadores
-const ultimos = lista.slice(0, 3).map((x) => `    <div class="card">${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<time datetime="${new Date(x.createdAt).toISOString().slice(0,10)}">${fecha(x.createdAt)}</time><h3><a href="/posts/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(x.desc.slice(0, 120))}…</p></div>`).join("\n");
+const ultimos = lista.slice(0, 3).map((x) => `    <div class="card">${x.cover ? `<a href="/posts/${x.slug}/"><img class="thumb" src="${x.cover}" alt="" loading="lazy"></a>` : ""}<time datetime="${new Date(x.createdAt).toISOString().slice(0,10)}">${fecha(x.createdAt)}</time><h3><a href="/posts/${x.slug}/">${esc(x.title)}</a></h3><p>${esc(recorta(x.desc, 120))}</p></div>`).join("\n");
 const home = readFileSync("index.html", "utf8").replace(/<!-- ultimo:start -->[\s\S]*?<!-- ultimo:end -->/, `<!-- ultimo:start -->\n${ultimos}\n<!-- ultimo:end -->`);
 writeFileSync("index.html", home);
 console.log("index con", lista.length, "posts; home con", Math.min(3, lista.length), "últimos");
