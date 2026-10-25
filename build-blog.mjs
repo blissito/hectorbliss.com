@@ -12,6 +12,12 @@ const POSTS = [
   { slug: "un-agente-que-agenda-tus-citas" },
   { slug: "cuanto-cuesta-un-pr-hecho-por-agentes" },
   { slug: "un-ano-construyendo-agentes-que-trabajan-solos" },
+  // Borradores: se publican con noindex, fuera del índice, la home y el sitemap
+  { slug: "cuanto-cuesta-un-agente-al-mes", draft: true },
+  { slug: "sofi-vendedora-por-whatsapp", draft: true },
+  { slug: "primer-proceso-a-automatizar", draft: true },
+  { slug: "asistente-con-tu-catalogo", draft: true },
+  { slug: "que-pasa-con-mis-datos", draft: true },
 ];
 
 // Posts que salieron del blog: su URL queda como redirect a /posts/ (Pages no da 301)
@@ -124,6 +130,7 @@ for (const cfg of POSTS) {
   md = md.replace(/^\s*#\s+[^\n]+\n/, ""); // el título va aparte
   if (cfg.strip) md = md.replace(cfg.strip, "");
   if (cfg.intro) md = cfg.intro + "\n\n" + md;
+  md = md.replace(/<!--[\s\S]*?-->\s*/g, "");
   // imágenes: descargar o quitar
   let n = 0; const imgs = [...md.matchAll(/!\[([^\]]*)\]\(([^)\s]+)[^)]*\)/g)];
   for (const m of imgs) {
@@ -141,14 +148,17 @@ for (const cfg of POSTS) {
   const coverAbs = cover ? `https://hectorbliss.com${cover}` : "https://hectorbliss.com/img/og.png";
   const heroImg = cover ? `<img class="cover" src="${cover}" alt="" width="1200" height="630">` : "";
   const minutos = Math.max(1, Math.round(md.split(/\s+/).length / 220));
-  const body = `<main class="post"><a class="back" href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · ${NAME} · ${minutos} min de lectura<button class="reader-btn" id="readerToggle" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg><span class="on">Modo lectura</span><span class="off">Salir de modo lectura</span></button></div>${heroImg}${html}</main>`;
+  const body = `<main class="post"><a class="back" href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · ${NAME} · ${minutos} min de lectura<button class="reader-btn" id="readerToggle" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg><span class="on">Modo lectura</span><span class="off">Salir de modo lectura</span></button></div>${cfg.draft ? `<p style="background:var(--bg2);border:2px dashed var(--acc2);border-radius:12px;padding:12px 16px;color:var(--muted)">Borrador: no está en el índice del blog ni en Google.</p>` : ""}${heroImg}${html}</main>`;
   mkdirSync(`posts/${cfg.slug}`, { recursive: true });
   const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: desc, datePublished: new Date(p.createdAt).toISOString(), dateModified: new Date(p.updatedAt || p.createdAt).toISOString(), inLanguage: "es-MX", image: coverAbs, mainEntityOfPage: `https://hectorbliss.com/posts/${cfg.slug}/`, author: PERSON, publisher: PERSON };
   const crumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://hectorbliss.com/" },
     { "@type": "ListItem", position: 2, name: "Blog", item: "https://hectorbliss.com/posts/" },
     { "@type": "ListItem", position: 3, name: p.title, item: `https://hectorbliss.com/posts/${cfg.slug}/` } ] };
-  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script>try{if(localStorage.getItem("reader")==="1")document.documentElement.classList.add("reader")}catch(e){}</script><script type="application/ld+json">${JSON.stringify(ld)}</script><script type="application/ld+json">${JSON.stringify(crumbs)}</script>`).replace("</main>", `</main><script>\n// Modo lectura: se recuerda en localStorage; Esc lo apaga\n(function(){var r=document.documentElement,b=document.getElementById("readerToggle");function set(on){r.classList.toggle("reader",on);b.setAttribute("aria-pressed",on);try{localStorage.setItem("reader",on?"1":"0")}catch(e){}}b.setAttribute("aria-pressed",r.classList.contains("reader"));b.addEventListener("click",function(){set(!r.classList.contains("reader"))});document.addEventListener("keydown",function(e){if(e.key==="Escape"&&r.classList.contains("reader"))set(false)})})();\n</script>`).replace(/https:\/\/hectorbliss\.com\/img\/og\.png/g, coverAbs));
+  let out = page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script>try{if(localStorage.getItem("reader")==="1")document.documentElement.classList.add("reader")}catch(e){}</script><script type="application/ld+json">${JSON.stringify(ld)}</script><script type="application/ld+json">${JSON.stringify(crumbs)}</script>`).replace("</main>", `</main><script>\n// Modo lectura: se recuerda en localStorage; Esc lo apaga\n(function(){var r=document.documentElement,b=document.getElementById("readerToggle");function set(on){r.classList.toggle("reader",on);b.setAttribute("aria-pressed",on);try{localStorage.setItem("reader",on?"1":"0")}catch(e){}}b.setAttribute("aria-pressed",r.classList.contains("reader"));b.addEventListener("click",function(){set(!r.classList.contains("reader"))});document.addEventListener("keydown",function(e){if(e.key==="Escape"&&r.classList.contains("reader"))set(false)})})();\n</script>`).replace(/https:\/\/hectorbliss\.com\/img\/og\.png/g, coverAbs);
+  if (cfg.draft) out = out.replace('<meta name="robots" content="index,follow">', '<meta name="robots" content="noindex,nofollow">');
+  writeFileSync(`posts/${cfg.slug}/index.html`, out);
+  if (cfg.draft) { console.log("borrador", cfg.slug); continue; }
   lista.push({ slug: cfg.slug, title: p.title, createdAt: p.createdAt, desc, imgs: n, cover, coverAbs });
   console.log("ok", cfg.slug, `${n} img`);
 }
