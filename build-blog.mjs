@@ -49,6 +49,15 @@ const extraCss = `<style>
 .post blockquote{border-left:4px solid var(--acc);margin:0;padding:4px 18px;color:var(--muted)}
 .post table{border-collapse:collapse;width:100%;font-size:.95rem}.post td,.post th{border:1px solid var(--line);padding:8px 10px;text-align:left}
 .post .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;margin:24px 0}
+.reader-btn{display:inline-flex;align-items:center;gap:8px;margin-left:12px;background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:6px 12px;font:inherit;font-size:.9rem;cursor:pointer;vertical-align:middle}
+.reader-btn svg{width:16px;height:16px}
+.reader-btn .off{display:none}
+/* modo lectura: sin nav ni footer, columna angosta y letra con serifa */
+html.reader nav,html.reader footer,html.reader .post>.back{display:none}
+html.reader .post{max-width:680px;padding-top:72px}
+html.reader .post p,html.reader .post li,html.reader .post blockquote{font-family:"Iowan Old Style",Charter,Georgia,serif;font-size:1.24rem;line-height:1.8}
+html.reader .reader-btn{position:fixed;top:16px;right:16px;z-index:20;background:var(--bg2);margin:0}
+html.reader .reader-btn .on{display:none}html.reader .reader-btn .off{display:inline}
 .list{max-width:760px;margin:0 auto;padding:56px 20px}
 .list article{border-top:1px solid var(--line);padding:26px 0;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
 .list article.no-thumb{grid-template-columns:1fr}
@@ -131,14 +140,15 @@ for (const cfg of POSTS) {
   const cover = p.cover || null;
   const coverAbs = cover ? `https://hectorbliss.com${cover}` : "https://hectorbliss.com/img/og.png";
   const heroImg = cover ? `<img class="cover" src="${cover}" alt="" width="1200" height="630">` : "";
-  const body = `<main class="post"><a href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · ${NAME}</div>${heroImg}${html}</main>`;
+  const minutos = Math.max(1, Math.round(md.split(/\s+/).length / 220));
+  const body = `<main class="post"><a class="back" href="/posts/" style="color:var(--muted);text-decoration:none">← Blog</a><h1>${esc(p.title)}</h1><div class="meta">${fecha(p.createdAt)} · ${NAME} · ${minutos} min de lectura<button class="reader-btn" id="readerToggle" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg><span class="on">Modo lectura</span><span class="off">Salir de modo lectura</span></button></div>${heroImg}${html}</main>`;
   mkdirSync(`posts/${cfg.slug}`, { recursive: true });
   const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: p.title, description: desc, datePublished: new Date(p.createdAt).toISOString(), dateModified: new Date(p.updatedAt || p.createdAt).toISOString(), inLanguage: "es-MX", image: coverAbs, mainEntityOfPage: `https://hectorbliss.com/posts/${cfg.slug}/`, author: PERSON, publisher: PERSON };
   const crumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://hectorbliss.com/" },
     { "@type": "ListItem", position: 2, name: "Blog", item: "https://hectorbliss.com/posts/" },
     { "@type": "ListItem", position: 3, name: p.title, item: `https://hectorbliss.com/posts/${cfg.slug}/` } ] };
-  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script type="application/ld+json">${JSON.stringify(ld)}</script><script type="application/ld+json">${JSON.stringify(crumbs)}</script>`).replace(/https:\/\/hectorbliss\.com\/img\/og\.png/g, coverAbs));
+  writeFileSync(`posts/${cfg.slug}/index.html`, page(p.title, desc, body, `https://hectorbliss.com/posts/${cfg.slug}/`, `<script>try{if(localStorage.getItem("reader")==="1")document.documentElement.classList.add("reader")}catch(e){}</script><script type="application/ld+json">${JSON.stringify(ld)}</script><script type="application/ld+json">${JSON.stringify(crumbs)}</script>`).replace("</main>", `</main><script>\n// Modo lectura: se recuerda en localStorage; Esc lo apaga\n(function(){var r=document.documentElement,b=document.getElementById("readerToggle");function set(on){r.classList.toggle("reader",on);b.setAttribute("aria-pressed",on);try{localStorage.setItem("reader",on?"1":"0")}catch(e){}}b.setAttribute("aria-pressed",r.classList.contains("reader"));b.addEventListener("click",function(){set(!r.classList.contains("reader"))});document.addEventListener("keydown",function(e){if(e.key==="Escape"&&r.classList.contains("reader"))set(false)})})();\n</script>`).replace(/https:\/\/hectorbliss\.com\/img\/og\.png/g, coverAbs));
   lista.push({ slug: cfg.slug, title: p.title, createdAt: p.createdAt, desc, imgs: n, cover, coverAbs });
   console.log("ok", cfg.slug, `${n} img`);
 }
