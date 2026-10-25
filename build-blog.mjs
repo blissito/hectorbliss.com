@@ -12,8 +12,8 @@ const POSTS = [
   { slug: "un-agente-que-agenda-tus-citas" },
   { slug: "cuanto-cuesta-un-pr-hecho-por-agentes" },
   { slug: "un-ano-construyendo-agentes-que-trabajan-solos" },
+  { slug: "cuanto-cuesta-un-agente-al-mes" },
   // Borradores: se publican con noindex, fuera del índice, la home y el sitemap
-  { slug: "cuanto-cuesta-un-agente-al-mes", draft: true },
   { slug: "sofi-vendedora-por-whatsapp", draft: true },
   { slug: "primer-proceso-a-automatizar", draft: true },
   { slug: "asistente-con-tu-catalogo", draft: true },
