@@ -1,0 +1,67 @@
+# Héctor (@blissito) Campos M. · Integración de IA para empresas
+
+> Integro IA en la operación de tu empresa en México: agentes que venden y cotizan por WhatsApp, asistentes con tu documentación y diagnóstico antes de gastar. Proyecto cerrado, entregas cada dos semanas.
+
+Héctor Campos M. (blissito) integra IA en la operación de empresas en México y Latinoamérica, con el equipo de fixter.org. Construye Ghosty, Easybits, Mailmask y Formmy, y usa esas mismas piezas con sus clientes. Ciudad de México. Idioma: español.
+
+## Contacto
+
+- Agendar llamada de 30 minutos (gratis): https://wa.me/527712412825?text=Quiero%20agendar%20la%20llamada%20de%2030%20min
+- Correo: contacto@fixter.org
+- WhatsApp: +52 771 241 2825
+
+## Servicios
+
+- **Automatización de procesos**: Llega un pedido por WhatsApp y el agente arma la cotización en PDF, la registra en tu CRM y pide el comprobante de pago. Te avisa sólo cuando algo no cuadra.
+- **Asistentes con tu documentación**: Tu equipo le pregunta «¿cuál es el precio de mayoreo del cloro de 20 litros?» y el asistente contesta con tu catálogo vigente. Tus clientes también le preguntan, a cualquier hora.
+- **Diagnóstico antes de gastar**: Reviso cómo trabaja tu equipo y te entrego por escrito qué proceso conviene automatizar primero, cuánto cuesta y cuántas horas a la semana te regresa. Si ninguno conviene, te lo digo.
+
+## Cómo trabaja
+
+- Llamada de 30 minutos, propuesta con alcance, costo cerrado y fecha, y entregas cada dos semanas.
+- Precio por proyecto cerrado, no por hora: anticipo pequeño y mensualidades con soporte incluido. No hay cifras públicas; se dan en la llamada.
+- Plazos: asistente con documentación, 2 a 4 semanas; automatización de un proceso, 3 a 6; integración con sistemas, 4 a 8.
+
+## Caso
+
+- [Sofi, vendedora por WhatsApp](https://hectorbliss.com/posts/un-ano-construyendo-agentes-que-trabajan-solos/): atiende el WhatsApp de una distribuidora de químicos de limpieza en Hidalgo; más de 1,000 conversaciones y 2,200 cotizaciones en PDF desde mayo de 2026.
+
+## Preguntas frecuentes
+
+- **¿Qué significa integrar IA en mi empresa?** Poner un sistema con IA dentro de un proceso que ya tienes: atención a clientes, cotizaciones, captura, reportes, soporte interno. Conectado a tus datos y a tus herramientas, en producción y medido. No hace falta ser una empresa de tecnología; hace falta un proceso que se repita y alguien que lo aterrice.
+- **¿Cuánto tarda?** Asistente con tu documentación: 2 a 4 semanas. Automatización de un proceso: 3 a 6 semanas. Integración con tus sistemas: 4 a 8 semanas. Proyectos grandes: 2 a 3 meses. Entrego cada dos semanas, así que ves avance desde la primera.
+- **¿Necesito saber de tecnología?** No. Tú explicas el proceso y qué te duele; yo me encargo de diseño, desarrollo, integración y pruebas, y entreno a tu equipo para operarlo. Lo que sí necesito es acceso a la gente que hoy hace el trabajo a mano.
+- **¿Cuánto cuesta?** Trabajo por proyecto cerrado, no por hora: antes de empezar sabes el precio total, qué incluye y cuándo se entrega. Se arranca con un anticipo pequeño y el resto se paga en mensualidades mientras el sistema ya trabaja para ti, con soporte incluido en cada mes. La primera llamada es gratis y sales de ella con el costo y la fecha por escrito.
+- **¿En qué se diferencia del agente que ya trae WhatsApp?** El agente de Meta contesta preguntas y recomienda productos. El que yo integro además arma la cotización en PDF, la registra en tu CRM, pide el comprobante de pago y sigue las reglas de tu negocio, como el precio de mayoreo. Si con el de Meta te alcanza, te lo digo en la llamada.
+- **¿Qué pasa después de entregar?** Sigo. El sistema se ajusta con el uso real, se actualiza cuando salen mejores modelos y tu equipo tiene a quién preguntarle. Se contrata como retainer mensual o por horas, según el tamaño.
+- **¿Se conecta con lo que ya uso?** Sí: CRM (HubSpot, Zoho, Salesforce, Kommo), ERP, bases de datos, hojas de cálculo, WhatsApp, Slack, correo, tiendas en línea y APIs propias. No reemplazas nada.
+- **¿Y mis datos?** Cifrados en tránsito y en reposo, con control de acceso por persona. Los agentes corren en infraestructura propia (Easybits, microVMs aisladas) y puedes ver y auditar cada paso que dan. Trabajo con proveedores de modelos que no entrenan con tus datos.
+
+## Productos
+
+- [Ghosty](https://ghosty.studio): vende tu catálogo por WhatsApp: contesta, cotiza en PDF y pide el comprobante de pago.
+- [Easybits](https://easybits.cloud): infraestructura para correr agentes durables, cada uno en su microVM.
+- [Mailmask](https://mailmask.studio): correo profesional en tu dominio sin pagar por persona.
+- [Formmy](https://formmy.app): chatbots con IA que atienden en tu sitio y en WhatsApp.
+
+## Proyectos abiertos
+
+- [Todos los proyectos](https://hectorbliss.com/proyectos/)
+- [ghosty-rec](https://blissito.github.io/ghosty-rec/): Graba una sola ventana de macOS desde la terminal y el agente la edita con zooms donde pasa la acción.
+- [ghosty-reel](https://github.com/blissito/ghosty-reel): Anuncios y motion graphics 3D hechos desde la terminal: Chrome captura la UI real, Blender renderiza y ffmpeg mezcla la voz.
+- [ghostycode](https://github.com/blissito/ghostycode): Agente de código para la terminal escrito en Rust: DeepSeek V4, MCP, subagentes y sesiones que se retoman.
+- [ghostykit](https://blissito.github.io/ghostykit/): Copiloto de agente para meter dentro de tu app React: propone la acción y espera tu visto bueno antes de hacerla.
+- [ghosty-chrome](https://github.com/blissito/ghosty-chrome): Tu agente usa tu propio Chrome con las sesiones que ya tienes abiertas, conectado por MCP.
+- [ghosty-lite](https://github.com/blissito/ghosty-lite): Agente de terminal ligero que vive en cajas efímeras y se maneja por WebSocket con ACP.
+- [acp-agent-ui](https://github.com/blissito/acp-agent-ui): Interfaz web para platicar con un agente que corre dentro de una microVM, hablando ACP.
+- [acp-desde-cero](https://github.com/blissito/acp-desde-cero): Un cliente de ACP escrito a mano en Node puro, sin dependencias. Cada commit es una lección.
+
+## Blog
+
+- [Cuánto cuesta al mes un agente que vende por WhatsApp](https://hectorbliss.com/posts/cuanto-cuesta-un-agente-al-mes/): ¿Cuánto cuesta tener un agente de IA vendiendo por WhatsApp? Desgloso el mes real de Sofi en cuatro renglones (modelo, WhatsApp, infraestructura y tiempo humano) y lo divido entre las cotizaciones que mandó.
+- [Un año construyendo agentes que trabajan solos](https://hectorbliss.com/posts/un-ano-construyendo-agentes-que-trabajan-solos/): Recuento, por si estás decidiendo si meter IA en tu operación. El caso que más me enseñó no es un demo Es Sofi, la vendedora de una distribuidora de…
+- [Cuánto cuesta de verdad un PR hecho por agentes de código](https://hectorbliss.com/posts/cuanto-cuesta-un-pr-hecho-por-agentes/): ¿Cuánto cuesta que agentes de IA hagan un PR? Un pedido me costó 4.32 USD en 4.2 horas de reloj, pero 3.0 de esas horas esperaba a una persona.
+- [Un agente que agenda, cobra y recuerda citas sin equivocarse](https://hectorbliss.com/posts/un-agente-que-agenda-tus-citas/): ¿Puede un agente de IA agendar citas sin meter la pata? Sí, si revisa disponibilidad antes, pide confirmación y el resumen sale de la base, no del modelo.
+- [MCP para quien no programa: conecta Claude a tu correo y agenda](https://hectorbliss.com/posts/mcp-para-quien-no-programa/): ¿Qué es MCP y cómo conecto Claude o ChatGPT a mi correo y mi agenda sin programar? Es un enchufe estándar: pegas una URL, inicias sesión y apruebas.
+- [Dale a tu agente su propio correo sin caer en spam](https://hectorbliss.com/posts/dale-correo-propio-a-tu-agente/): ¿Le doy mi Gmail a mi agente de IA? Mejor dale una dirección propia en tu dominio, con DKIM, SPF y DMARC bien puestos para que sus correos no caigan en spam.
+- [Tu agente trabaja a su hora: crons y webhooks que le llegan solos](https://hectorbliss.com/posts/tu-agente-trabaja-a-su-hora/): ¿Cómo hago que mi agente de IA trabaje a una hora fija o despierte cuando llega un pago? Con un cron que lo llama y un buzón de webhooks que lo espera.
